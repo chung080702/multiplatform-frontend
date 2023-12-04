@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:multiplatform_app/screens/Group/group.member-list.dart';
 
 class GroupDetail extends StatelessWidget {
   const GroupDetail({super.key});
@@ -8,7 +9,12 @@ class GroupDetail extends StatelessWidget {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-
+        actions: [
+          IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.more_vert_rounded)
+          )
+        ],
       ),
       body: Column(
         children: <Widget>[
@@ -35,8 +41,14 @@ class GroupDetail extends StatelessWidget {
                 Text(
                   "35 thành viên"
                 ),
+                Container(height: 8),
                 FilledButton(
-                  onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const MemberList())
+                      );
+                    },
                   child: SizedBox(
                     width: double.infinity,
                     child: Center(

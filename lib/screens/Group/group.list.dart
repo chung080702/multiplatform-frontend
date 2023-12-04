@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:multiplatform_app/screens/Group/group.detail.dart';
+import 'package:multiplatform_app/screens/Group/group.member-list.dart';
 class Groups extends StatelessWidget {
   const Groups({super.key});
 
@@ -26,10 +28,14 @@ class Groups extends StatelessWidget {
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             childAspectRatio: 0.7,
+            mainAxisExtent: 288
           ),
           itemCount: 8,
+          shrinkWrap: true,
           itemBuilder: (context, index) {
-            return GroupCard();
+            return GroupCard(
+              title: "Hội những người có trái tim nhân ái" + '\n',
+            );
           },
         )
     );
@@ -37,8 +43,8 @@ class Groups extends StatelessWidget {
 }
 
 class GroupCard extends StatelessWidget {
-  const GroupCard({super.key});
-
+  const GroupCard({super.key, required this.title});
+  final String title;
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -60,20 +66,22 @@ class GroupCard extends StatelessWidget {
             ),
           ),
           Container(
-            padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
+            padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
             width: double.infinity,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Group 1",
+                  title,
                   style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold
+                    fontSize: 18,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
                   ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+
                 ),
-                Container(height: 10),
                 Text(
                   "35 thành viên",
                   style: TextStyle(

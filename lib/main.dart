@@ -18,6 +18,9 @@ class MyApp extends StatelessWidget {
           seedColor: Colors.white,
           brightness: Brightness.light
         ),
+        textTheme: TextTheme(
+
+        )
       ),
     );
   }
