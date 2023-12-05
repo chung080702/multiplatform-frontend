@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
+import 'package:multiplatform_app/screens/Group/group.create.dart';
 import 'package:multiplatform_app/screens/Group/group.detail.dart';
 import 'package:multiplatform_app/screens/Group/group.member-list.dart';
 class Groups extends StatelessWidget {
@@ -18,7 +19,12 @@ class Groups extends StatelessWidget {
               tooltip: 'Search Group',
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const CreateGroup())
+                );
+              },
               icon: const Icon(Icons.add_rounded),
               tooltip: 'Create new group',
             )
