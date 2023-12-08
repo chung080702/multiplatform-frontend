@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:multiplatform_app/general/contants/app_color.dart';
 import 'package:multiplatform_app/general/contants/app_text_style.dart';
+import 'package:multiplatform_app/screens/view_event/brief_event.dart';
 
 class ViewEvent extends StatefulWidget {
   const ViewEvent({super.key});
@@ -63,7 +64,8 @@ class _ViewEventState extends State<ViewEvent> {
               )
             ],
           ),
-          const SizedBox(height: 10)
+          const SizedBox(height: 10),
+          BriefEvent()
         ]),
       ),
     );
