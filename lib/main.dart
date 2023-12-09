@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:multiplatform_app/general/contants/app_font.dart';
+import 'package:multiplatform_app/general/constants/app_font.dart';
 import 'package:multiplatform_app/general/routes/routes.dart';
 import 'package:multiplatform_app/screens/view_event/view_event.index.dart';
 
