@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:multiplatform_app/general/constants/app_font.dart';
 import 'package:multiplatform_app/general/routes/routes.dart';
+import 'package:multiplatform_app/screens/add_event/add_event.index.dart';
 import 'package:multiplatform_app/screens/view_event/view_event.index.dart';
 
 Future<void> main() async {
@@ -19,7 +20,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: "Thiện nguyện",
       onGenerateRoute: Routes.onGeneralRoute,
-      home: ViewEvent(),
+      home: AddEvent(),
       theme: ThemeData(fontFamily: AppFont.helveticaNeue),
     );
   }

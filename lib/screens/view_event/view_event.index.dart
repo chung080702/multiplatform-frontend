@@ -24,6 +24,61 @@ class _ViewEventState extends State<ViewEvent> {
       "content":
           "Thời tiết đang dần chuyển mùa bằng những cơn mưa mang theo hơi lạnh, cũng là lúc quý vị mở ngăn tủ tìm cho con mình những chiếc áo thay mùa. Khi mà các em nhỏ thành phố được diện những chiếc áo len, áo khoác mới ấm áp, thời trang thì đâu đó trên những bản làng miền núi, vùng cao, những em bé vẫn còn phải sống trong điều kiện vô cùng nghèo khó, vất vả. Trong cái rét cắt da, cắt thịt các em vẫn chỉ tới trường với những tấm áo mong manh, không giày tất, khăn, mũ ấm, bởi cơm ăn mỗi ngày còn chưa đủ no. Khi con quý vị được nằm trong chăn êm, nệm ấm, được chăm sóc chu đáo từ bữa ăn, giấc ngủ thì đâu đó, những đứa trẻ vùng khó khăn vẫn phải nhịn đói mỗi sáng đến trường. Những chiếc áo thử lại sau mùa hè của con, cháu quý vị bị chật, bị ngắn nong không vừa, quý vị có thể mở lòng tư bi chia sẻ cùng các con em tại các vùng còn gian khó.Tháng 11 đang đến gần, nhân dịp kỷ niệm Ngày Hiến chương các Nhà giáo, Ban đại diện cha mẹ phụ huynh Trường Mầm non Trần Nguyên Hãn phối hợp với Ban giám hiệu nhà trường mở chiến dịch kêu gọi “Áo ấm cho con”. Chúng tôi mong nhận được sự quan tâm ủng hộ, chia sẻ từ tất cả các nhà hảo tâm, quý thầy cô, quý phụ huynh. Mọi sự đóng góp, ủng hộ quần áo, chăn màn, truyện, đồ chơi và tiền mặt quý vị hãy gửi về Ban đại diện Hội phụ huynh các lớp cùng các cô giáo trực tiếp tại các lớp. Thời gian ủng hộ bắt đầu từ 25/10/2018 và kết thúc đợt cao điểm trước ngày 12/ 11/ 2018.Ban tổ chức chiến dịch rất mong nhận được sự đồng tâm rộng lòng từ tất cả quý vị để chương trình “Áo ấm cho con” được thành công",
     },
+    {
+      "href":
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQH__I8kgPXeY9QKSEmFZJUYw4S3ftX0DTx_ZDBVuqYmBFfe89_wbp4pljDQAmZb-VhVUs&usqp=CAU",
+      "name": "Giúp đỡ trẻ em vùng cao",
+      "desc": "Chúng ta sẽ lên Cao Bằng để giúo đỡ trẻ em nhỏ tuổi",
+      "startTime": "9A.M-04/12/2023",
+      "endTime": "5P.M-05/12/2023",
+      "address": "An Lạc - Hạ Lang - Cao Bằng",
+      "content":
+          "Thời tiết đang dần chuyển mùa bằng những cơn mưa mang theo hơi lạnh, cũng là lúc quý vị mở ngăn tủ tìm cho con mình những chiếc áo thay mùa. Khi mà các em nhỏ thành phố được diện những chiếc áo len, áo khoác mới ấm áp, thời trang thì đâu đó trên những bản làng miền núi, vùng cao, những em bé vẫn còn phải sống trong điều kiện vô cùng nghèo khó, vất vả. Trong cái rét cắt da, cắt thịt các em vẫn chỉ tới trường với những tấm áo mong manh, không giày tất, khăn, mũ ấm, bởi cơm ăn mỗi ngày còn chưa đủ no. Khi con quý vị được nằm trong chăn êm, nệm ấm, được chăm sóc chu đáo từ bữa ăn, giấc ngủ thì đâu đó, những đứa trẻ vùng khó khăn vẫn phải nhịn đói mỗi sáng đến trường. Những chiếc áo thử lại sau mùa hè của con, cháu quý vị bị chật, bị ngắn nong không vừa, quý vị có thể mở lòng tư bi chia sẻ cùng các con em tại các vùng còn gian khó.Tháng 11 đang đến gần, nhân dịp kỷ niệm Ngày Hiến chương các Nhà giáo, Ban đại diện cha mẹ phụ huynh Trường Mầm non Trần Nguyên Hãn phối hợp với Ban giám hiệu nhà trường mở chiến dịch kêu gọi “Áo ấm cho con”. Chúng tôi mong nhận được sự quan tâm ủng hộ, chia sẻ từ tất cả các nhà hảo tâm, quý thầy cô, quý phụ huynh. Mọi sự đóng góp, ủng hộ quần áo, chăn màn, truyện, đồ chơi và tiền mặt quý vị hãy gửi về Ban đại diện Hội phụ huynh các lớp cùng các cô giáo trực tiếp tại các lớp. Thời gian ủng hộ bắt đầu từ 25/10/2018 và kết thúc đợt cao điểm trước ngày 12/ 11/ 2018.Ban tổ chức chiến dịch rất mong nhận được sự đồng tâm rộng lòng từ tất cả quý vị để chương trình “Áo ấm cho con” được thành công",
+    },
+    {
+      "href":
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQH__I8kgPXeY9QKSEmFZJUYw4S3ftX0DTx_ZDBVuqYmBFfe89_wbp4pljDQAmZb-VhVUs&usqp=CAU",
+      "name": "Giúp đỡ trẻ em vùng cao",
+      "desc": "Chúng ta sẽ lên Cao Bằng để giúo đỡ trẻ em nhỏ tuổi",
+      "startTime": "9A.M-04/12/2023",
+      "endTime": "5P.M-05/12/2023",
+      "address": "An Lạc - Hạ Lang - Cao Bằng",
+      "content":
+          "Thời tiết đang dần chuyển mùa bằng những cơn mưa mang theo hơi lạnh, cũng là lúc quý vị mở ngăn tủ tìm cho con mình những chiếc áo thay mùa. Khi mà các em nhỏ thành phố được diện những chiếc áo len, áo khoác mới ấm áp, thời trang thì đâu đó trên những bản làng miền núi, vùng cao, những em bé vẫn còn phải sống trong điều kiện vô cùng nghèo khó, vất vả. Trong cái rét cắt da, cắt thịt các em vẫn chỉ tới trường với những tấm áo mong manh, không giày tất, khăn, mũ ấm, bởi cơm ăn mỗi ngày còn chưa đủ no. Khi con quý vị được nằm trong chăn êm, nệm ấm, được chăm sóc chu đáo từ bữa ăn, giấc ngủ thì đâu đó, những đứa trẻ vùng khó khăn vẫn phải nhịn đói mỗi sáng đến trường. Những chiếc áo thử lại sau mùa hè của con, cháu quý vị bị chật, bị ngắn nong không vừa, quý vị có thể mở lòng tư bi chia sẻ cùng các con em tại các vùng còn gian khó.Tháng 11 đang đến gần, nhân dịp kỷ niệm Ngày Hiến chương các Nhà giáo, Ban đại diện cha mẹ phụ huynh Trường Mầm non Trần Nguyên Hãn phối hợp với Ban giám hiệu nhà trường mở chiến dịch kêu gọi “Áo ấm cho con”. Chúng tôi mong nhận được sự quan tâm ủng hộ, chia sẻ từ tất cả các nhà hảo tâm, quý thầy cô, quý phụ huynh. Mọi sự đóng góp, ủng hộ quần áo, chăn màn, truyện, đồ chơi và tiền mặt quý vị hãy gửi về Ban đại diện Hội phụ huynh các lớp cùng các cô giáo trực tiếp tại các lớp. Thời gian ủng hộ bắt đầu từ 25/10/2018 và kết thúc đợt cao điểm trước ngày 12/ 11/ 2018.Ban tổ chức chiến dịch rất mong nhận được sự đồng tâm rộng lòng từ tất cả quý vị để chương trình “Áo ấm cho con” được thành công",
+    },
+    {
+      "href":
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQH__I8kgPXeY9QKSEmFZJUYw4S3ftX0DTx_ZDBVuqYmBFfe89_wbp4pljDQAmZb-VhVUs&usqp=CAU",
+      "name": "Giúp đỡ trẻ em vùng cao",
+      "desc": "Chúng ta sẽ lên Cao Bằng để giúo đỡ trẻ em nhỏ tuổi",
+      "startTime": "9A.M-04/12/2023",
+      "endTime": "5P.M-05/12/2023",
+      "address": "An Lạc - Hạ Lang - Cao Bằng",
+      "content":
+          "Thời tiết đang dần chuyển mùa bằng những cơn mưa mang theo hơi lạnh, cũng là lúc quý vị mở ngăn tủ tìm cho con mình những chiếc áo thay mùa. Khi mà các em nhỏ thành phố được diện những chiếc áo len, áo khoác mới ấm áp, thời trang thì đâu đó trên những bản làng miền núi, vùng cao, những em bé vẫn còn phải sống trong điều kiện vô cùng nghèo khó, vất vả. Trong cái rét cắt da, cắt thịt các em vẫn chỉ tới trường với những tấm áo mong manh, không giày tất, khăn, mũ ấm, bởi cơm ăn mỗi ngày còn chưa đủ no. Khi con quý vị được nằm trong chăn êm, nệm ấm, được chăm sóc chu đáo từ bữa ăn, giấc ngủ thì đâu đó, những đứa trẻ vùng khó khăn vẫn phải nhịn đói mỗi sáng đến trường. Những chiếc áo thử lại sau mùa hè của con, cháu quý vị bị chật, bị ngắn nong không vừa, quý vị có thể mở lòng tư bi chia sẻ cùng các con em tại các vùng còn gian khó.Tháng 11 đang đến gần, nhân dịp kỷ niệm Ngày Hiến chương các Nhà giáo, Ban đại diện cha mẹ phụ huynh Trường Mầm non Trần Nguyên Hãn phối hợp với Ban giám hiệu nhà trường mở chiến dịch kêu gọi “Áo ấm cho con”. Chúng tôi mong nhận được sự quan tâm ủng hộ, chia sẻ từ tất cả các nhà hảo tâm, quý thầy cô, quý phụ huynh. Mọi sự đóng góp, ủng hộ quần áo, chăn màn, truyện, đồ chơi và tiền mặt quý vị hãy gửi về Ban đại diện Hội phụ huynh các lớp cùng các cô giáo trực tiếp tại các lớp. Thời gian ủng hộ bắt đầu từ 25/10/2018 và kết thúc đợt cao điểm trước ngày 12/ 11/ 2018.Ban tổ chức chiến dịch rất mong nhận được sự đồng tâm rộng lòng từ tất cả quý vị để chương trình “Áo ấm cho con” được thành công",
+    },
+    {
+      "href":
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQH__I8kgPXeY9QKSEmFZJUYw4S3ftX0DTx_ZDBVuqYmBFfe89_wbp4pljDQAmZb-VhVUs&usqp=CAU",
+      "name": "Giúp đỡ trẻ em vùng cao",
+      "desc": "Chúng ta sẽ lên Cao Bằng để giúo đỡ trẻ em nhỏ tuổi",
+      "startTime": "9A.M-04/12/2023",
+      "endTime": "5P.M-05/12/2023",
+      "address": "An Lạc - Hạ Lang - Cao Bằng",
+      "content":
+          "Thời tiết đang dần chuyển mùa bằng những cơn mưa mang theo hơi lạnh, cũng là lúc quý vị mở ngăn tủ tìm cho con mình những chiếc áo thay mùa. Khi mà các em nhỏ thành phố được diện những chiếc áo len, áo khoác mới ấm áp, thời trang thì đâu đó trên những bản làng miền núi, vùng cao, những em bé vẫn còn phải sống trong điều kiện vô cùng nghèo khó, vất vả. Trong cái rét cắt da, cắt thịt các em vẫn chỉ tới trường với những tấm áo mong manh, không giày tất, khăn, mũ ấm, bởi cơm ăn mỗi ngày còn chưa đủ no. Khi con quý vị được nằm trong chăn êm, nệm ấm, được chăm sóc chu đáo từ bữa ăn, giấc ngủ thì đâu đó, những đứa trẻ vùng khó khăn vẫn phải nhịn đói mỗi sáng đến trường. Những chiếc áo thử lại sau mùa hè của con, cháu quý vị bị chật, bị ngắn nong không vừa, quý vị có thể mở lòng tư bi chia sẻ cùng các con em tại các vùng còn gian khó.Tháng 11 đang đến gần, nhân dịp kỷ niệm Ngày Hiến chương các Nhà giáo, Ban đại diện cha mẹ phụ huynh Trường Mầm non Trần Nguyên Hãn phối hợp với Ban giám hiệu nhà trường mở chiến dịch kêu gọi “Áo ấm cho con”. Chúng tôi mong nhận được sự quan tâm ủng hộ, chia sẻ từ tất cả các nhà hảo tâm, quý thầy cô, quý phụ huynh. Mọi sự đóng góp, ủng hộ quần áo, chăn màn, truyện, đồ chơi và tiền mặt quý vị hãy gửi về Ban đại diện Hội phụ huynh các lớp cùng các cô giáo trực tiếp tại các lớp. Thời gian ủng hộ bắt đầu từ 25/10/2018 và kết thúc đợt cao điểm trước ngày 12/ 11/ 2018.Ban tổ chức chiến dịch rất mong nhận được sự đồng tâm rộng lòng từ tất cả quý vị để chương trình “Áo ấm cho con” được thành công",
+    },
+    {
+      "href":
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQH__I8kgPXeY9QKSEmFZJUYw4S3ftX0DTx_ZDBVuqYmBFfe89_wbp4pljDQAmZb-VhVUs&usqp=CAU",
+      "name": "Giúp đỡ trẻ em vùng cao",
+      "desc": "Chúng ta sẽ lên Cao Bằng để giúo đỡ trẻ em nhỏ tuổi",
+      "startTime": "9A.M-04/12/2023",
+      "endTime": "5P.M-05/12/2023",
+      "address": "An Lạc - Hạ Lang - Cao Bằng",
+      "content":
+          "Thời tiết đang dần chuyển mùa bằng những cơn mưa mang theo hơi lạnh, cũng là lúc quý vị mở ngăn tủ tìm cho con mình những chiếc áo thay mùa. Khi mà các em nhỏ thành phố được diện những chiếc áo len, áo khoác mới ấm áp, thời trang thì đâu đó trên những bản làng miền núi, vùng cao, những em bé vẫn còn phải sống trong điều kiện vô cùng nghèo khó, vất vả. Trong cái rét cắt da, cắt thịt các em vẫn chỉ tới trường với những tấm áo mong manh, không giày tất, khăn, mũ ấm, bởi cơm ăn mỗi ngày còn chưa đủ no. Khi con quý vị được nằm trong chăn êm, nệm ấm, được chăm sóc chu đáo từ bữa ăn, giấc ngủ thì đâu đó, những đứa trẻ vùng khó khăn vẫn phải nhịn đói mỗi sáng đến trường. Những chiếc áo thử lại sau mùa hè của con, cháu quý vị bị chật, bị ngắn nong không vừa, quý vị có thể mở lòng tư bi chia sẻ cùng các con em tại các vùng còn gian khó.Tháng 11 đang đến gần, nhân dịp kỷ niệm Ngày Hiến chương các Nhà giáo, Ban đại diện cha mẹ phụ huynh Trường Mầm non Trần Nguyên Hãn phối hợp với Ban giám hiệu nhà trường mở chiến dịch kêu gọi “Áo ấm cho con”. Chúng tôi mong nhận được sự quan tâm ủng hộ, chia sẻ từ tất cả các nhà hảo tâm, quý thầy cô, quý phụ huynh. Mọi sự đóng góp, ủng hộ quần áo, chăn màn, truyện, đồ chơi và tiền mặt quý vị hãy gửi về Ban đại diện Hội phụ huynh các lớp cùng các cô giáo trực tiếp tại các lớp. Thời gian ủng hộ bắt đầu từ 25/10/2018 và kết thúc đợt cao điểm trước ngày 12/ 11/ 2018.Ban tổ chức chiến dịch rất mong nhận được sự đồng tâm rộng lòng từ tất cả quý vị để chương trình “Áo ấm cho con” được thành công",
+    }
   ];
 
   @override
@@ -82,7 +137,6 @@ class _ViewEventState extends State<ViewEvent> {
           const SizedBox(height: 10),
           Expanded(
             child: ListView.builder(
-              // shrinkWrap: true,
               scrollDirection: Axis.vertical,
               itemCount: list.length,
               itemBuilder: (context, index) {
