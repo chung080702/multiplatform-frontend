@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:multiplatform_app/models/group.model.dart';
+import 'package:multiplatform_app/utils/api_endpoint.dart';
 
 class GroupCard extends StatelessWidget {
+  Group group;
+
+  GroupCard({required this.group});
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -13,7 +19,7 @@ class GroupCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Image.network(
-            'https://cdn.sforum.vn/sforum/wp-content/uploads/2023/06/tai-hinh-nen-dep-nhat-the-gioi-57.jpg',
+            ApiEndPoints.baseURL + ApiEndPoints.fileEndPoints.getFile + group.imageID,
             height: 140,
             width: 240,
             fit: BoxFit.cover,
@@ -25,7 +31,7 @@ class GroupCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Nhóm 1',
+                  group.name,
                   style: TextStyle(
                     fontSize: 16,
                     color: Colors.black,
@@ -36,7 +42,7 @@ class GroupCard extends StatelessWidget {
 
                 ),
                 Text(
-                  "35 thành viên",
+                  '${group.memberNumber} thành viên',
                   style: TextStyle(
                       fontSize: 13,
                       color: Colors.black54

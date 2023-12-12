@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:multiplatform_app/utils/api_endpoint.dart';
+import '../models/event.model.dart';
 
 class EventCard extends StatelessWidget {
+  Event event;
+
+  EventCard({required this.event});
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -13,7 +19,7 @@ class EventCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Image.network(
-            'https://www.socialtables.com/wp-content/uploads/2016/10/iStock-540095978.jpg',
+            ApiEndPoints.baseURL + ApiEndPoints.fileEndPoints.getFile + event.imageIds[0],
             height: 140,
             width: 240,
             fit: BoxFit.cover,
@@ -25,7 +31,7 @@ class EventCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Sự kiện 1',
+                  '${event.name}',
                   style: TextStyle(
                     fontSize: 16,
                     color: Colors.black,
