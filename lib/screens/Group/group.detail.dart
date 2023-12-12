@@ -10,9 +10,59 @@ class GroupDetail extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.more_vert_rounded)
+          MenuAnchor(
+            builder: (BuildContext context, MenuController controller, Widget? child){
+              return IconButton(
+                onPressed: () {
+                  if(controller.isOpen){
+                    controller.close();
+                  }else{
+                    controller.open();
+                  }
+                },
+                icon: Icon(Icons.more_vert_rounded)
+              );
+            },
+            menuChildren: <Widget>[
+              MenuItemButton(
+                child: Row(
+                  // mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.group_rounded),
+                    Container(width: 4,),
+                    Text("Thành viên")
+                  ],
+                ),
+                onPressed: () {},
+              ),
+              MenuItemButton(
+                child: Row(
+                  // mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.how_to_reg_rounded),
+                    Container(width: 4,),
+                    Text("Yêu cầu tham gia")
+                  ],
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const MemberList())
+                  );
+                },
+              ),
+              MenuItemButton(
+                child: Row(
+                  // mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.exit_to_app_rounded),
+                    Container(width: 4,),
+                    Text("Rời khỏi nhóm")
+                  ],
+                ),
+                onPressed: () {},
+              ),
+            ]
           )
         ],
       ),
@@ -43,12 +93,7 @@ class GroupDetail extends StatelessWidget {
                 ),
                 Container(height: 8),
                 FilledButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const MemberList())
-                      );
-                    },
+                    onPressed: () {},
                   child: SizedBox(
                     width: double.infinity,
                     child: Center(

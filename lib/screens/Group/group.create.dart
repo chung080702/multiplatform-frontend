@@ -19,6 +19,16 @@ class CreateGroup extends StatelessWidget {
                 labelText: "Tên nhóm"
               ),
             ),
+            Container(height: 16,),
+            TextField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: "Thêm mô tả",
+                alignLabelWithHint: true
+              ),
+              maxLines: null,
+              minLines: 3,
+            ),
             Container(
               padding: EdgeInsets.fromLTRB(0, 16, 0, 0),
               alignment: Alignment.topLeft,

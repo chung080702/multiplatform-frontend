@@ -1,11 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_layout_grid/flutter_layout_grid.dart';
+import 'package:multiplatform_app/models/group.model.dart';
+import 'package:multiplatform_app/screens/Group/group.controller.dart';
 import 'package:multiplatform_app/screens/Group/group.create.dart';
 import 'package:multiplatform_app/screens/Group/group.detail.dart';
-import 'package:multiplatform_app/screens/Group/group.member-list.dart';
-class Groups extends StatelessWidget {
+
+class Groups extends StatefulWidget {
   const Groups({super.key});
 
+  @override
+  State<StatefulWidget> createState() => _GroupsState();
+
+}
+
+class _GroupsState extends State<Groups> {
+  late Future<List<Group>> futureGroups;
+
+  @override
+  void initState() {
+    super.initState();
+    futureGroups = fetchGroup();
+  }
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -30,17 +44,31 @@ class Groups extends StatelessWidget {
             )
           ],
         ),
-        body: GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 0.7,
-            mainAxisExtent: 288
-          ),
-          itemCount: 8,
-          shrinkWrap: true,
-          itemBuilder: (context, index) {
-            return GroupCard(
-              title: "Hội những người có trái tim nhân ái" + '\n',
+        body: FutureBuilder<List<Group>>(
+          future: futureGroups,
+          builder: (context, snapshot){
+            if(snapshot.hasData){
+              return GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: 0.7,
+                    mainAxisExtent: 288
+                ),
+                itemCount: snapshot.data!.length,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return GroupCard(
+                    title: snapshot.data![index].name + '\n',
+                    imageId: snapshot.data![index].imageId,
+                    memberNumber: snapshot.data![index].memberNumber,
+                  );
+                },
+              );
+            } else if (snapshot.hasError){
+              return Text(snapshot.error.toString());
+            }
+            return const Center(
+              child: CircularProgressIndicator(),
             );
           },
         )
@@ -49,8 +77,15 @@ class Groups extends StatelessWidget {
 }
 
 class GroupCard extends StatelessWidget {
-  const GroupCard({super.key, required this.title});
+  const GroupCard({
+    super.key,
+    required this.title,
+    required this.imageId,
+    required this.memberNumber
+  });
   final String title;
+  final String imageId;
+  final int memberNumber;
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -66,7 +101,7 @@ class GroupCard extends StatelessWidget {
           AspectRatio(
             aspectRatio: 4/3,
             child: Image.network(
-              'https://cdn.sforum.vn/sforum/wp-content/uploads/2023/06/tai-hinh-nen-dep-nhat-the-gioi-57.jpg',
+              'https://multiplatform-backend.vercel.app/file/$imageId',
               width: double.infinity,
               fit: BoxFit.fill,
             ),
@@ -89,7 +124,7 @@ class GroupCard extends StatelessWidget {
 
                 ),
                 Text(
-                  "35 thành viên",
+                  "$memberNumber thành viên",
                   style: TextStyle(
                       fontSize: 14,
                       color: Colors.black54
