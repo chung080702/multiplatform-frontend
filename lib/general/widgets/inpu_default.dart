@@ -33,6 +33,7 @@ class InputDefault extends StatelessWidget {
           child: Text(labelText, style: AppTextStyle.textStyle_14_600_20),
         ),
         TextFormField(
+          controller: editingController,
           keyboardType: textInputType,
           onTap: onTap,
           readOnly: readOnly,
