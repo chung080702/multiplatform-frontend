@@ -110,11 +110,11 @@ class DetailEvent extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "From $startTime",
+                        "From ${DateTime.parse(startTime).toLocal()}",
                         style: AppTextStyle.textStyle_14_700_20
                             .merge(const TextStyle(color: AppColor.dark)),
                       ),
-                      Text("To $endTime",
+                      Text("To ${DateTime.parse(endTime).toLocal()}",
                           style: AppTextStyle.textStyle_14_700_20
                               .merge(const TextStyle(color: AppColor.dark))),
                     ],

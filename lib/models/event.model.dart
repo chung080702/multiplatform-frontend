@@ -1,5 +1,6 @@
 class Event {
   String id;
+  String groupId;
   String name;
   String start;
   String end;
@@ -11,6 +12,7 @@ class Event {
 
   Event(
       {required this.id,
+        required this.groupId,
       required this.name,
       required this.start,
       required this.end,
@@ -26,6 +28,7 @@ class Event {
     return Event(
         id: json['_id'],
         name: json['name'],
+        groupId: json['groupId'],
         start: json['start'],
         end: json['end'],
         address: json['address'],

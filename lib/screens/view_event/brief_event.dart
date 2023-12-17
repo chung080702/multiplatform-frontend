@@ -80,11 +80,11 @@ class BriefEvent extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                         ),
                         Text(
-                          "Từ : $startTime",
+                          "From : ${DateTime.parse(startTime).toLocal()}",
                           style: AppTextStyle.textStyle_12_600_18,
                         ),
                         Text(
-                          "Đến : $endTime",
+                          "To : ${DateTime.parse(endTime).toLocal()}",
                           style: AppTextStyle.textStyle_12_600_18,
                         ),
                         Row(

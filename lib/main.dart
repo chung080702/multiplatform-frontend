@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:multiplatform_app/screens/Register/register.index.dart';
+import 'package:multiplatform_app/screens/add_event/add_event.index.dart';
 import 'package:multiplatform_app/screens/view_event/view_event.index.dart';
 import 'package:multiplatform_app/general/routes/routes.dart';
 
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: ViewEvent(),
+      home: AddEvent(),
       onGenerateRoute: Routes.onGeneralRoute,
     );
   }

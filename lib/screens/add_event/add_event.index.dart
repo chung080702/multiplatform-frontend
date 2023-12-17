@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:multiplatform_app/general/constants/app_color.dart';
 import 'package:multiplatform_app/general/constants/app_text_style.dart';
 import 'package:multiplatform_app/general/widgets/input_default.dart';
+import 'package:multiplatform_app/screens/add_event/add_event.controller.dart';
 
 class AddEvent extends StatefulWidget {
   const AddEvent({super.key});
@@ -18,8 +19,9 @@ class _AddEventState extends State<AddEvent> {
   late TextEditingController eventDescController;
   late TextEditingController startTimeController;
   late TextEditingController endTimeController;
-  late TextEditingController addressTimeController;
-  late TextEditingController contentTimeController;
+  late TextEditingController addressController;
+  late TextEditingController contentController;
+  AddEventController addEventController = AddEventController();
   final _formKey = GlobalKey<FormState>();
   List<File> images = [];
 
@@ -29,8 +31,8 @@ class _AddEventState extends State<AddEvent> {
     eventDescController = TextEditingController();
     startTimeController = TextEditingController();
     endTimeController = TextEditingController();
-    addressTimeController = TextEditingController();
-    contentTimeController = TextEditingController();
+    addressController = TextEditingController();
+    contentController = TextEditingController();
     super.initState();
   }
 
@@ -181,7 +183,7 @@ class _AddEventState extends State<AddEvent> {
                         },
                       ),
                       InputDefault(
-                        editingController: addressTimeController,
+                        editingController: addressController,
                         labelText: "Địa chỉ",
                         hintText: "Nhập địa chỉ",
                         obscureText: false,
@@ -195,7 +197,7 @@ class _AddEventState extends State<AddEvent> {
                         readOnly: false,
                       ),
                       InputDefault(
-                        editingController: addressTimeController,
+                        editingController: contentController,
                         labelText: "Nội dung",
                         hintText: "Nhập nội dung",
                         obscureText: false,
@@ -276,8 +278,23 @@ class _AddEventState extends State<AddEvent> {
                     ],
                   )),
               ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {}
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      bool result = await addEventController.createEvent(
+                          "657ebd5d9afe4c1007dff9af",
+                          eventNameController.text,
+                          eventDescController.text,
+                          startTimeController.text,
+                          endTimeController.text,
+                          addressController.text,
+                          contentController.text,
+                          images);
+                      if (result) {
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text("addition failed")));
+                      }
+                    }
                   },
                   child: const Text("Thêm sự kiện"))
             ],

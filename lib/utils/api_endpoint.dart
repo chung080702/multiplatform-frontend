@@ -14,8 +14,13 @@ class _AuthEndPoints {
 
 class _GroupEndPoints {
   final String getAll = 'group/page/';
+
   String getAllOfUser(String accountID, int pageNumber) {
     return 'group/user/$accountID/page/$pageNumber';
+  }
+
+  String createEvent(String groupId) {
+    return "group/$groupId/event";
   }
 }
 
