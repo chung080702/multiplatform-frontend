@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:multiplatform_app/general/constants/app_color.dart';
 import 'package:multiplatform_app/general/constants/app_text_style.dart';
 import 'package:multiplatform_app/screens/view_event/brief_event.dart';
+import 'package:multiplatform_app/screens/view_event/view_event.controller.dart';
+import 'package:multiplatform_app/models/event.model.dart';
 
 class ViewEvent extends StatefulWidget {
   const ViewEvent({super.key});
@@ -12,6 +14,8 @@ class ViewEvent extends StatefulWidget {
 
 class _ViewEventState extends State<ViewEvent> {
   late TextEditingController filterEditingController;
+  ViewEventController viewEventController = ViewEventController();
+  int page = 1;
   List<Map<String, String>> list = [
     {
       "href":
@@ -135,23 +139,35 @@ class _ViewEventState extends State<ViewEvent> {
             ],
           ),
           const SizedBox(height: 10),
-          Expanded(
-            child: ListView.builder(
-              scrollDirection: Axis.vertical,
-              itemCount: list.length,
-              itemBuilder: (context, index) {
-                return BriefEvent(
-                  href: list[index]["href"]!,
-                  name: list[index]["name"]!,
-                  desc: list[index]["desc"]!,
-                  startTime: list[index]["startTime"]!,
-                  endTime: list[index]["endTime"]!,
-                  address: list[index]["address"]!,
-                  content: list[index]["content"]!,
-                );
-              },
-            ),
-          )
+          FutureBuilder(future: viewEventController.getEvents(page), builder: (context, snapshot) {
+            if(snapshot.connectionState == ConnectionState.waiting) {
+              return const CircularProgressIndicator();
+            }
+            if(snapshot.hasError) {
+              return Text("Error ${snapshot.error.toString()}");
+            }
+            if(snapshot.hasData) {
+              final List<Event>? events = snapshot.data;
+              return Expanded(
+                child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  itemCount: events!.length,
+                  itemBuilder: (context, index) {
+                    return BriefEvent(
+                      hrefs: events[index].imageIds,
+                      name: events[index].name,
+                      desc: events[index].description,
+                      startTime: events[index].start,
+                      endTime: events[index].end,
+                      address: events[index].address,
+                      content: events[index].content,
+                    );
+                  },
+                ),
+              );
+            }
+            return const SizedBox();
+          },)
         ]),
       ),
     );

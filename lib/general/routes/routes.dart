@@ -13,11 +13,11 @@ class Routes {
       case eventList:
         return BasePageRoute(child: const ViewEvent());
       case eventDetail:
-        final Map<String, String> args =
-            routeSettings.arguments as Map<String, String>;
+        final Map<String, dynamic> args =
+            routeSettings.arguments as Map<String, dynamic>;
         return BasePageRoute(
             child: DetailEvent(
-          href: args["href"]!,
+          hrefs: args["hrefs"]!,
           name: args["name"]!,
           desc: args["desc"]!,
           startTime: args["startTime"]!,

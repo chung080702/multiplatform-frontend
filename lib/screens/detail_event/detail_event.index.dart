@@ -3,11 +3,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:multiplatform_app/general/constants/app_color.dart';
 import 'package:multiplatform_app/general/constants/app_icon.dart';
 import 'package:multiplatform_app/general/constants/app_text_style.dart';
+import 'package:multiplatform_app/utils/api_endpoint.dart';
 
 class DetailEvent extends StatelessWidget {
   const DetailEvent(
       {super.key,
-      required this.href,
+      required this.hrefs,
       required this.name,
       required this.desc,
       required this.startTime,
@@ -15,7 +16,7 @@ class DetailEvent extends StatelessWidget {
       required this.address,
       required this.content});
 
-  final String href;
+  final List<String> hrefs;
   final String name;
   final String desc;
   final String startTime;
@@ -27,9 +28,16 @@ class DetailEvent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 0,
+        backgroundColor: AppColor.greySoft,
+        leading: InkWell(
+            onTap: () {
+              Navigator.of(context).pop();
+            },
+            child: const Icon(Icons.keyboard_arrow_left)),
       ),
       body: Container(
+        constraints:
+            BoxConstraints(minHeight: MediaQuery.of(context).size.height),
         decoration: const BoxDecoration(
             color: AppColor.greySoft,
             borderRadius: BorderRadius.all(Radius.circular(8))),
@@ -38,14 +46,28 @@ class DetailEvent extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ClipRRect(
-                borderRadius: const BorderRadius.all(Radius.circular(8)),
-                child: Image.network(
-                  href,
-                  width: double.infinity,
-                  fit: BoxFit.fitWidth,
-                ),
-              ),
+              hrefs.length > 1
+                  ? GridView(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2, crossAxisSpacing: 10),
+                      shrinkWrap: true,
+                      children: [
+                        ...hrefs.map((href) => ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: Image.network(
+                                  "${ApiEndPoints.baseURL}/file/$href"),
+                            ))
+                      ],
+                    )
+                  : ClipRRect(
+                      borderRadius: const BorderRadius.all(Radius.circular(8)),
+                      child: Image.network(
+                        "${ApiEndPoints.baseURL}/file/${hrefs[0]}",
+                        width: double.infinity,
+                        fit: BoxFit.fitWidth,
+                      ),
+                    ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 6),
                 child: Column(
@@ -120,20 +142,11 @@ class DetailEvent extends StatelessWidget {
                   const SizedBox(
                     width: 10,
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "From $startTime",
-                        style: AppTextStyle.textStyle_14_700_20
-                            .merge(const TextStyle(color: AppColor.dark)),
-                      ),
-                      Text("To $endTime",
-                          style: AppTextStyle.textStyle_14_700_20
-                              .merge(const TextStyle(color: AppColor.dark))),
-                    ],
-                  )
+                  Text(
+                    address,
+                    style: AppTextStyle.textStyle_14_700_20
+                        .merge(const TextStyle(color: AppColor.dark)),
+                  ),
                 ],
               ),
               const Padding(
@@ -141,7 +154,10 @@ class DetailEvent extends StatelessWidget {
                 child: Text("About Event",
                     style: AppTextStyle.textStyle_18_700_28),
               ),
-              Text(content, style: AppTextStyle.textStyle_14_400_20,)
+              Text(
+                content,
+                style: AppTextStyle.textStyle_14_400_20,
+              )
             ],
           ),
         ),

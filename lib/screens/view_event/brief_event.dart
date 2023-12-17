@@ -4,11 +4,12 @@ import 'package:multiplatform_app/general/constants/app_color.dart';
 import 'package:multiplatform_app/general/constants/app_icon.dart';
 import 'package:multiplatform_app/general/constants/app_text_style.dart';
 import 'package:multiplatform_app/general/routes/routes.dart';
+import 'package:multiplatform_app/utils/api_endpoint.dart';
 
 class BriefEvent extends StatelessWidget {
   const BriefEvent(
       {super.key,
-      required this.href,
+      required this.hrefs,
       required this.name,
       required this.desc,
       required this.startTime,
@@ -16,7 +17,7 @@ class BriefEvent extends StatelessWidget {
       required this.address,
       required this.content});
 
-  final String href;
+  final List<String> hrefs;
   final String name;
   final String desc;
   final String startTime;
@@ -29,13 +30,13 @@ class BriefEvent extends StatelessWidget {
     return InkWell(
       onTap: () {
         Navigator.of(context).pushNamed(Routes.eventDetail, arguments: {
-          "href": href,
+          "hrefs": hrefs,
           "name": name,
           "desc": desc,
           "startTime": startTime,
           "endTime": endTime,
           "address": address,
-          "content" : content
+          "content": content
         });
       },
       child: Padding(
@@ -44,17 +45,16 @@ class BriefEvent extends StatelessWidget {
           height: MediaQuery.sizeOf(context).height / 6,
           alignment: Alignment.center,
           decoration: BoxDecoration(
-              color: AppColor.greySoft,
-              borderRadius: BorderRadius.circular(8)),
+              color: AppColor.greySoft, borderRadius: BorderRadius.circular(8)),
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           child: Row(
             children: [
               Flexible(
                   flex: 1,
                   child: ClipRRect(
-                    borderRadius:const BorderRadius.all(Radius.circular(4)),
+                    borderRadius: const BorderRadius.all(Radius.circular(4)),
                     child: Image.network(
-                      href,
+                      "${ApiEndPoints.baseURL}/file/${hrefs[0]}",
                       height: double.infinity,
                       width: double.infinity,
                       fit: BoxFit.cover,
@@ -69,25 +69,23 @@ class BriefEvent extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(name, style: AppTextStyle.textStyle_18_700_28),
+                        Text(
+                          name,
+                          style: AppTextStyle.textStyle_18_700_28,
+                        ),
                         Text(
                           desc,
                           style: AppTextStyle.textStyle_12_400_18,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        Row(
-                          children: [
-                            Text(
-                              startTime,
-                              style: AppTextStyle.textStyle_14_600_20,
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              endTime,
-                              style: AppTextStyle.textStyle_14_600_20,
-                            ),
-                          ],
+                        Text(
+                          "Từ : $startTime",
+                          style: AppTextStyle.textStyle_12_600_18,
+                        ),
+                        Text(
+                          "Đến : $endTime",
+                          style: AppTextStyle.textStyle_12_600_18,
                         ),
                         Row(
                           children: [
@@ -95,6 +93,8 @@ class BriefEvent extends StatelessWidget {
                             Text(
                               address,
                               style: AppTextStyle.textStyle_12_400_18,
+                              overflow: TextOverflow.visible,
+                              maxLines: 1,
                             ),
                           ],
                         )
