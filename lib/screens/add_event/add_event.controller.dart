@@ -1,8 +1,8 @@
-import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:multiplatform_app/utils/api_endpoint.dart';
 import 'package:path/path.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AddEventController {
   Future<bool> createEvent(
@@ -15,19 +15,14 @@ class AddEventController {
       String content,
       List<File> images) async {
     try {
-      var headers = {'Content-Type': 'multipart/form-data;'};
       var url = Uri.parse(ApiEndPoints.baseURL +
           ApiEndPoints.groupEndPoints.createEvent(groupId));
-      final body = {
-        "name": name,
-        "start": startTime,
-        "end": endTime,
-        "address": address,
-        "description": desc,
-        "content": content,
-        "image": images
-      };
+      final SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      String? token = sharedPreferences.getString("token");
       var request = http.MultipartRequest("POST", url);
+      request.headers["Authorization"] = token ?? "";
+      request.headers["Content-Type"] = 'multipart/form-data';
       request.fields["name"] = name;
       request.fields["start"] = startTime;
       request.fields["end"] = endTime;
@@ -40,6 +35,8 @@ class AddEventController {
             filename: basename(image.path)));
       });
       var response = await request.send();
+      print(
+          "${DateTime.now()}-AddEventController-createEvent-response:${response.statusCode}");
       if (response.statusCode == 200 || response.statusCode == 201) {
         return true;
       }
