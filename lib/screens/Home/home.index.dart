@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:multiplatform_app/screens/Group/group.list.dart';
 import 'package:multiplatform_app/screens/Profile/profile.index.dart';
 import 'package:multiplatform_app/utils/color.dart';
 import 'package:multiplatform_app/widgets/event_card_list/event_card_list.index.dart';
@@ -11,7 +12,10 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
           onTap: (index) {
-            if (index == 2) {
+            if (index == 1) {
+              Get.to(Groups());
+            }
+            else if (index == 2) {
               Get.to(ProfilePage());
             }
           },
@@ -20,7 +24,7 @@ class HomePage extends StatelessWidget {
           items: [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
             BottomNavigationBarItem(
-                icon: Icon(Icons.notifications), label: 'Notifications'),
+                icon: Icon(Icons.group), label: 'Group'),
             BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
           ]
       ),
