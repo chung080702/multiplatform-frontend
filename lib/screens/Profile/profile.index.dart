@@ -38,7 +38,7 @@ class ProfilePage extends StatelessWidget {
           items: [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
             BottomNavigationBarItem(
-                icon: Icon(Icons.notifications), label: 'Notifications'),
+                icon: Icon(Icons.group), label: 'Group'),
             BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
           ]),
       appBar: AppBar(

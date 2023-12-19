@@ -28,18 +28,14 @@ class DetailEvent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColor.greySoft,
-        leading: InkWell(
-            onTap: () {
-              Navigator.of(context).pop();
-            },
-            child: const Icon(Icons.keyboard_arrow_left)),
+        title: Text('Sự kiện'),
+        centerTitle: true,
       ),
       body: Container(
         constraints:
             BoxConstraints(minHeight: MediaQuery.of(context).size.height),
         decoration: const BoxDecoration(
-            color: AppColor.greySoft,
+            color: AppColor.white,
             borderRadius: BorderRadius.all(Radius.circular(8))),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         child: SingleChildScrollView(
@@ -149,15 +145,19 @@ class DetailEvent extends StatelessWidget {
                   ),
                 ],
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 6),
-                child: Text("About Event",
-                    style: AppTextStyle.textStyle_18_700_28),
+              Padding(
+                padding: EdgeInsets.only(top: 6, left: 8),
+                child: Column(
+                  children: [
+                    Text("About Event",
+                        style: AppTextStyle.textStyle_18_700_28),
+                    Text(
+                      content,
+                      style: AppTextStyle.textStyle_14_400_20,
+                    )
+                  ],
+                ),
               ),
-              Text(
-                content,
-                style: AppTextStyle.textStyle_14_400_20,
-              )
             ],
           ),
         ),

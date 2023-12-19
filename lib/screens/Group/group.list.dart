@@ -3,6 +3,10 @@ import 'package:multiplatform_app/models/group.model.dart';
 import 'package:multiplatform_app/screens/Group/group.controller.dart';
 import 'package:multiplatform_app/screens/Group/group.create.dart';
 import 'package:multiplatform_app/screens/Group/group.detail.dart';
+import 'package:get/get.dart';
+import 'package:multiplatform_app/screens/Home/home.index.dart';
+import 'package:multiplatform_app/screens/Profile/profile.index.dart';
+import 'package:multiplatform_app/utils/color.dart';
 
 class Groups extends StatefulWidget {
   const Groups({super.key});
@@ -24,6 +28,22 @@ class _GroupsState extends State<Groups> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
+        bottomNavigationBar: BottomNavigationBar(
+            onTap: (index) {
+              if (index == 0) {
+                Get.offAll(HomePage());
+              }else if(index == 2){
+                Get.offAll(ProfilePage());
+              }
+            },
+            currentIndex: 1,
+            selectedItemColor: backgroundGradientFirst,
+            items: [
+              BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.group), label: 'Group'),
+              BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+            ]),
         appBar: AppBar(
           title: const Text('Groups'),
           actions: <Widget>[
