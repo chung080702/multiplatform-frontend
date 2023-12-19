@@ -45,13 +45,19 @@ class InputDefault extends StatelessWidget {
               .merge(AppTextStyle.textStyle_12_600_18),
           validator: validator,
           decoration: InputDecoration(
-              contentPadding:
-                  const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-              hintText: hintText,
-              filled: true,
-              fillColor: AppColor.white,
-              border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(8))),
+            focusColor: AppColor.shade60Blue,
+            focusedBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: AppColor.shade60Blue),
+                borderRadius: BorderRadius.all(Radius.circular(8))),
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+            hintText: hintText,
+            filled: true,
+            fillColor: AppColor.white,
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide:const BorderSide(color: AppColor.grey300)),
+          ),
         )
       ],
     );
