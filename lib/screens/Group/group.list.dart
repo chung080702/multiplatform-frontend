@@ -7,9 +7,10 @@ import 'package:get/get.dart';
 import 'package:multiplatform_app/screens/Home/home.index.dart';
 import 'package:multiplatform_app/screens/Profile/profile.index.dart';
 import 'package:multiplatform_app/utils/color.dart';
+import 'package:multiplatform_app/widgets/group_card_list/group_list.controller.dart';
 
 class Groups extends StatefulWidget {
-  const Groups({super.key});
+  final groupListController = Get.find<GroupListController>();
 
   @override
   State<StatefulWidget> createState() => _GroupsState();

@@ -9,11 +9,17 @@ import 'package:http/http.dart' as http;
 
 class GroupListController extends GetxController {
   final accountController = Get.find<AccountController>();
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   Future<List<Group>> fetchGetAllGroupApi() async {
     try {
+      final SharedPreferences? prefs = await _prefs;
+      String token = await prefs!.getString('token')!;
+      Map<String, String> headers = {
+        'Authorization': token,
+      };
       var url = Uri.parse(ApiEndPoints.baseURL + ApiEndPoints.groupEndPoints.getAll + "1");
-      var response = await http.get(url);
+      var response = await http.get(url, headers: headers);
       if (response.statusCode == 200) {
         var data = await json.decode(utf8.decode(response.bodyBytes));
         List<dynamic> jsonGroups = data['groups'];

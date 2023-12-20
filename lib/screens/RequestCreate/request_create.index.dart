@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:multiplatform_app/screens/Home/home.index.dart';
 import 'package:multiplatform_app/screens/Profile/profile.index.dart';
 import 'package:multiplatform_app/screens/RequestCreate/request_create.controller.dart';
@@ -12,6 +15,13 @@ class RequestCreate extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            Get.offAll(ProfilePage());
+            requestCreateController.reset();
+          },
+        ),
         title: Text('Tạo yêu cầu trợ giúp'),
         centerTitle: true,
         actions: [
@@ -46,7 +56,7 @@ class RequestCreate extends StatelessWidget {
                 icon: Icon(Icons.notifications), label: 'Notifications'),
             BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
           ]),
-      body: Container(
+      body: Obx(() => Container(
         padding: EdgeInsets.all(20),
         child: Column(
           children: [
@@ -62,12 +72,20 @@ class RequestCreate extends StatelessWidget {
               maxLines: 5,
               decoration: InputDecoration(
                 hintText: 'Nội dung',
-
               ),
+            ),
+            SizedBox(height: 10,),
+            requestCreateController.image.value.path.isEmpty
+                ? Text('No image selected.', style: TextStyle(color: Colors.black),)
+                : Image.file(File(requestCreateController.image.value.path), height: 300, fit: BoxFit.cover,),
+            SizedBox(height: 20,),
+            ElevatedButton(
+              onPressed: () => requestCreateController.pickImage(ImageSource.gallery),
+              child: Text('Chọn ảnh từ thư viện'),
             )
           ],
         ),
-      ),
+      ),),
     );
   }
 }

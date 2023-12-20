@@ -9,6 +9,7 @@ import 'package:multiplatform_app/utils/color.dart';
 import 'package:multiplatform_app/widgets/event_card_list/event_card_list.index.dart';
 import 'package:multiplatform_app/widgets/group_card.index.dart';
 import 'package:multiplatform_app/widgets/group_card_list/group_card_list.index.dart';
+import 'package:multiplatform_app/widgets/request_card_list/request_card_list.index.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -107,13 +108,13 @@ class ProfilePage extends StatelessWidget {
                     Align(
                       alignment: Alignment.topLeft,
                       child: Text(
-                        'Sự kiện đã tham gia',
+                        'Yêu cầu trợ giúp của bạn',
                         style: TextStyle(
                             fontSize: 16, fontWeight: FontWeight.w600),
                       ),
                     ),
-                    EventCardList(info: {
-                      'type': 'all',
+                    RequestCardList(info: {
+                      'type': 'ofUser',
                     },),
                     SizedBox(
                       height: 20,
