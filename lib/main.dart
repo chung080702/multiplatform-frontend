@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: RegisterPage(),
+      home: ViewEvent(),
       onGenerateRoute: Routes.onGeneralRoute,
     );
   }
