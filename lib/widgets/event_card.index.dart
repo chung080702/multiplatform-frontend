@@ -4,7 +4,6 @@ import 'package:multiplatform_app/utils/api_endpoint.dart';
 import '../models/event.model.dart';
 import 'package:get/get.dart';
 
-
 class EventCard extends StatelessWidget {
   Event event;
 
@@ -14,19 +13,26 @@ class EventCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.to(DetailEvent(hrefs: event.imageIds, name: event.name, desc: event.description, startTime: event.start, endTime: event.end, address: event.address, content: event.content));
+        Get.to(DetailEvent(
+            hrefs: event.imageIds,
+            name: event.name,
+            desc: event.description,
+            startTime: event.start,
+            endTime: event.end,
+            address: event.address,
+            content: event.content));
       },
       child: Card(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8)
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         clipBehavior: Clip.antiAliasWithSaveLayer,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Image.network(
-              ApiEndPoints.baseURL + ApiEndPoints.fileEndPoints.getFile + event.imageIds[0],
+              ApiEndPoints.baseURL +
+                  ApiEndPoints.fileEndPoints.getFile +
+                  event.imageIds[0],
               height: 140,
               width: 240,
               fit: BoxFit.cover,
@@ -47,7 +53,9 @@ class EventCard extends StatelessWidget {
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  SizedBox(height: 5,),
+                  SizedBox(
+                    height: 5,
+                  ),
                 ],
               ),
             ),

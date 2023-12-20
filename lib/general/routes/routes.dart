@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:multiplatform_app/general/routes/base_page_route.dart';
 import 'package:multiplatform_app/screens/Home/home.index.dart';
+import 'package:multiplatform_app/screens/add_event/add_event.index.dart';
 import 'package:multiplatform_app/screens/detail_event/detail_event.index.dart';
 import 'package:multiplatform_app/screens/view_event/view_event.index.dart';
 
 class Routes {
+  static const String addEvent = "addEvent";
   static const String eventList = 'eventList';
   static const String eventDetail = 'eventDetail';
 
   static Route<dynamic> onGeneralRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
+      case addEvent:
+        return BasePageRoute(child: const AddEvent());
       case eventList:
         return BasePageRoute(child: const ViewEvent());
       case eventDetail:
