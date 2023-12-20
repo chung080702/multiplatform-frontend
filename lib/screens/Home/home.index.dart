@@ -2,9 +2,12 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:multiplatform_app/screens/Group/group.list.dart';
 import 'package:multiplatform_app/screens/Profile/profile.index.dart';
+import 'package:multiplatform_app/screens/RequestView/request_view.index.dart';
+import 'package:multiplatform_app/screens/view_event/view_event.index.dart';
 import 'package:multiplatform_app/utils/color.dart';
 import 'package:multiplatform_app/widgets/event_card_list/event_card_list.index.dart';
 import 'package:multiplatform_app/widgets/group_card_list/group_card_list.index.dart';
+import 'package:multiplatform_app/widgets/request_card_list/request_card_list.index.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -66,10 +69,42 @@ class HomePage extends StatelessWidget {
                 'type': 'all',
               },),
               SizedBox(height: 20,),
-              Text("Các sự kiện sắp diễn ra", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
+              Row(
+                children: [
+                Text("Các sự kiện sắp diễn ra", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
+                SizedBox(width: 10,),
+                InkWell(
+                  onTap: () {
+                    Get.to(ViewEvent());
+                  },
+                  child: Text(
+                    'Xem thêm',
+                    style: TextStyle(color: backgroundGradientFirst, fontSize: 16, fontWeight: FontWeight.w600),
+                  ),
+                )
+              ],),
               EventCardList(info: {
                 'type': 'all',
               }),
+              SizedBox(height: 20,),
+              Row(
+                children: [
+                  Text("Các yêu cầu trợ giúp", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
+                  SizedBox(width: 10,),
+                  InkWell(
+                    onTap: () {
+                      Get.to(RequestView());
+                    },
+                    child: Text(
+                      'Xem thêm',
+                      style: TextStyle(color: backgroundGradientFirst, fontSize: 16, fontWeight: FontWeight.w600),
+                    ),
+                  )
+                ],
+              ),
+              RequestCardList(info: {
+                'type': 'all',
+              })
             ],
           ),
         ),

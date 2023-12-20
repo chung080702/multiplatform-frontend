@@ -95,7 +95,7 @@ class _ViewEventState extends State<ViewEvent> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 0,
+        //toolbarHeight: 0,
       ),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),

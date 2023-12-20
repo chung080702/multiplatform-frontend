@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:multiplatform_app/screens/detail_event/detail_event.index.dart';
+import 'package:multiplatform_app/screens/RequestDetail/request_detail.index.dart';
+import '../models/request.model.dart';
 import 'package:multiplatform_app/utils/api_endpoint.dart';
-import '../models/event.model.dart';
 import 'package:get/get.dart';
 
 
-class EventCard extends StatelessWidget {
-  Event event;
+class RequestCard extends StatelessWidget {
+  Request request;
 
-  EventCard({required this.event});
+  RequestCard({required this.request});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.to(DetailEvent(hrefs: event.imageIds, name: event.name, desc: event.description, startTime: event.start, endTime: event.end, address: event.address, content: event.content));
+        Get.to(RequestDetail(request: request));
       },
       child: Card(
         shape: RoundedRectangleBorder(
@@ -25,11 +25,18 @@ class EventCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            request.image != '' ?
             Image.network(
-              ApiEndPoints.baseURL + ApiEndPoints.fileEndPoints.getFile + event.imageIds[0],
+              ApiEndPoints.baseURL + ApiEndPoints.fileEndPoints.getFile + request.image,
               height: 140,
               width: 240,
               fit: BoxFit.cover,
+            ): Container(
+              height: 140,
+              width: 240,
+              child: Center(
+                child: Text('Yêu cầu trợ giúp'),
+              ),
             ),
             Container(
               padding: const EdgeInsets.fromLTRB(8, 3, 8, 0),
@@ -38,7 +45,7 @@ class EventCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '${event.name}',
+                    '${request.title}',
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.black,

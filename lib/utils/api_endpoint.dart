@@ -36,4 +36,12 @@ class _EventEndPoints {
 
 class _RequestEndPoints {
   final String createRequest = 'supportRequest';
+
+  String getAll(int pageNumber) {
+    return 'supportRequest/page/$pageNumber';
+  }
+
+  String getAllOfUser(String accountID, int pageNumber) {
+    return 'supportRequest/account/$accountID/page/$pageNumber';
+  }
 }
