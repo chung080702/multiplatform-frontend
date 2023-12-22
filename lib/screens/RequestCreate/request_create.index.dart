@@ -31,61 +31,63 @@ class RequestCreate extends StatelessWidget {
               onTap: () {
                 requestCreateController.fetchCreateRequestApi();
               },
-              child: Text('Thêm', style: TextStyle(
-                color: backgroundGradientFirst,
-                fontWeight: FontWeight.w600,
-              ),),
+              child: Text(
+                'Thêm',
+                style: TextStyle(
+                  color: backgroundGradientFirst,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
             ),
           )
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-          onTap: (index) {
-            if (index == 0) {
-              Get.offAll(HomePage());
-            }
-            else if (index == 2) {
-              Get.offAll(ProfilePage());
-            }
-          },
-          currentIndex: 2,
-          selectedItemColor: backgroundGradientFirst,
-          items: [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.notifications), label: 'Notifications'),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-          ]),
-      body: Obx(() => Container(
-        padding: EdgeInsets.all(20),
-        child: Column(
-          children: [
-            TextField(
-              controller: requestCreateController.titleTextController,
-              decoration: InputDecoration(
-                hintText: 'Tiêu đề',
+      body: Obx(
+        () => Container(
+          padding: EdgeInsets.all(20),
+          child: Column(
+            children: [
+              TextField(
+                controller: requestCreateController.titleTextController,
+                decoration: InputDecoration(
+                  hintText: 'Tiêu đề',
+                ),
               ),
-            ),
-            SizedBox(height: 20,),
-            TextField(
-              controller: requestCreateController.contentTextController,
-              maxLines: 5,
-              decoration: InputDecoration(
-                hintText: 'Nội dung',
+              SizedBox(
+                height: 20,
               ),
-            ),
-            SizedBox(height: 10,),
-            requestCreateController.image.value.path.isEmpty
-                ? Text('No image selected.', style: TextStyle(color: Colors.black),)
-                : Image.file(File(requestCreateController.image.value.path), height: 300, fit: BoxFit.cover,),
-            SizedBox(height: 20,),
-            ElevatedButton(
-              onPressed: () => requestCreateController.pickImage(ImageSource.gallery),
-              child: Text('Chọn ảnh từ thư viện'),
-            )
-          ],
+              TextField(
+                controller: requestCreateController.contentTextController,
+                maxLines: 5,
+                decoration: InputDecoration(
+                  hintText: 'Nội dung',
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              requestCreateController.image.value.path.isEmpty
+                  ? Text(
+                      'No image selected.',
+                      style: TextStyle(color: Colors.black),
+                    )
+                  : Image.file(
+                      File(requestCreateController.image.value.path),
+                      height: 300,
+                      fit: BoxFit.cover,
+                    ),
+              SizedBox(
+                height: 20,
+              ),
+              ElevatedButton(
+                onPressed: () =>
+                    requestCreateController.pickImage(ImageSource.gallery),
+                child: Text('Chọn ảnh từ thư viện'),
+              )
+            ],
+          ),
         ),
-      ),),
+      ),
     );
   }
 }

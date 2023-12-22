@@ -18,22 +18,6 @@ class Groups extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        bottomNavigationBar: BottomNavigationBar(
-            onTap: (index) {
-              if (index == 0) {
-                Get.offAll(HomePage());
-              } else if (index == 2) {
-                Get.offAll(ProfilePage());
-              }
-            },
-            currentIndex: 1,
-            selectedItemColor: backgroundGradientFirst,
-            items: [
-              BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-              BottomNavigationBarItem(icon: Icon(Icons.group), label: 'Group'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.person), label: 'Profile'),
-            ]),
         appBar: AppBar(
           title: const Text('Groups'),
           bottom: TabBar(tabs: [
