@@ -31,7 +31,9 @@ class ProfilePage extends StatelessWidget {
             if (index == 0) {
               Get.offAll(HomePage());
             }else if(index == 1){
-              Get.offAll(Groups());
+              Get.offAll(Groups(info: {
+                'type': 'all'
+              },));
             }
           },
           currentIndex: 2,

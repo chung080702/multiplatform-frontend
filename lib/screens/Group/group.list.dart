@@ -10,7 +10,8 @@ import 'package:multiplatform_app/utils/color.dart';
 import 'package:multiplatform_app/widgets/group_card_list/group_list.controller.dart';
 
 class Groups extends StatefulWidget {
-  final groupListController = Get.find<GroupListController>();
+  final Map<String, dynamic> info;
+  Groups({required this.info});
 
   @override
   State<StatefulWidget> createState() => _GroupsState();
@@ -19,11 +20,13 @@ class Groups extends StatefulWidget {
 
 class _GroupsState extends State<Groups> {
   late Future<List<Group>> futureGroups;
+  final groupListController = Get.find<GroupListController>();
+
 
   @override
   void initState() {
     super.initState();
-    futureGroups = fetchGroup();
+    futureGroups = fetchGroupList();
   }
   @override
   Widget build(BuildContext context) {
@@ -95,7 +98,30 @@ class _GroupsState extends State<Groups> {
         )
     );
   }
+
+  Future<List<Group>> fetchGroupList() async {
+    if (widget.info['type'] == 'all') {
+      try {
+        var tmpGroupList =
+        await groupListController.fetchGetAllGroupApi();
+        return tmpGroupList;
+      } catch (e) {
+        return [];
+      }
+    } else if (widget.info['type'] == 'ofUser') {
+      try {
+        var tmpGroupList =
+        await groupListController.fetchGetAllOfUserApi();
+        return tmpGroupList;
+      } catch (e) {
+        return [];
+      }
+    } else {
+      return [];
+    }
+  }
 }
+
 
 class GroupCard extends StatelessWidget {
   const GroupCard({

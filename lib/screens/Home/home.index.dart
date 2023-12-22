@@ -16,7 +16,9 @@ class HomePage extends StatelessWidget {
       bottomNavigationBar: BottomNavigationBar(
           onTap: (index) {
             if (index == 1) {
-              Get.to(Groups());
+              Get.to(Groups(info: {
+                'type': 'all'
+              }));
             }
             else if (index == 2) {
               Get.to(ProfilePage());
