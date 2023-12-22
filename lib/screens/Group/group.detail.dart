@@ -2,7 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:multiplatform_app/screens/Group/group.member-list.dart';
 
 class GroupDetail extends StatelessWidget {
-  const GroupDetail({super.key});
+  const GroupDetail({
+    super.key,
+    required this.groupName,
+    required this.imageId,
+    required this.numberMembers,
+  });
+
+  final String groupName;
+  final String imageId;
+  final int numberMembers;
 
   @override
   Widget build(BuildContext context) {
@@ -11,67 +20,72 @@ class GroupDetail extends StatelessWidget {
       appBar: AppBar(
         actions: [
           MenuAnchor(
-            builder: (BuildContext context, MenuController controller, Widget? child){
-              return IconButton(
-                onPressed: () {
-                  if(controller.isOpen){
-                    controller.close();
-                  }else{
-                    controller.open();
-                  }
-                },
-                icon: Icon(Icons.more_vert_rounded)
-              );
-            },
-            menuChildren: <Widget>[
-              MenuItemButton(
-                child: Row(
-                  // mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.group_rounded),
-                    Container(width: 4,),
-                    Text("Thành viên")
-                  ],
+              builder: (BuildContext context, MenuController controller,
+                  Widget? child) {
+                return IconButton(
+                    onPressed: () {
+                      if (controller.isOpen) {
+                        controller.close();
+                      } else {
+                        controller.open();
+                      }
+                    },
+                    icon: Icon(Icons.more_vert_rounded));
+              },
+              menuChildren: <Widget>[
+                MenuItemButton(
+                  child: Row(
+                    // mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.group_rounded),
+                      Container(
+                        width: 4,
+                      ),
+                      Text("Thành viên")
+                    ],
+                  ),
+                  onPressed: () {},
                 ),
-                onPressed: () {},
-              ),
-              MenuItemButton(
-                child: Row(
-                  // mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.how_to_reg_rounded),
-                    Container(width: 4,),
-                    Text("Yêu cầu tham gia")
-                  ],
+                MenuItemButton(
+                  child: Row(
+                    // mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.how_to_reg_rounded),
+                      Container(
+                        width: 4,
+                      ),
+                      Text("Yêu cầu tham gia")
+                    ],
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const MemberList()));
+                  },
                 ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const MemberList())
-                  );
-                },
-              ),
-              MenuItemButton(
-                child: Row(
-                  // mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.exit_to_app_rounded),
-                    Container(width: 4,),
-                    Text("Rời khỏi nhóm")
-                  ],
+                MenuItemButton(
+                  child: Row(
+                    // mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.exit_to_app_rounded),
+                      Container(
+                        width: 4,
+                      ),
+                      Text("Rời khỏi nhóm")
+                    ],
+                  ),
+                  onPressed: () {},
                 ),
-                onPressed: () {},
-              ),
-            ]
-          )
+              ])
         ],
       ),
       body: Column(
         children: <Widget>[
           AspectRatio(
-            aspectRatio: 16/9,
+            aspectRatio: 16 / 9,
             child: Image.network(
-              'https://cdn.sforum.vn/sforum/wp-content/uploads/2023/06/tai-hinh-nen-dep-nhat-the-gioi-57.jpg',
+              'https://multiplatform-backend.vercel.app/file/$imageId',
               width: double.infinity,
               fit: BoxFit.fill,
             ),
@@ -82,31 +96,25 @@ class GroupDetail extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  "Group 1",
-                  style: TextStyle(
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold
-                  ),
+                  groupName.substring(0, groupName.length - 1),
+                  style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
                 ),
-                Text(
-                  "35 thành viên"
-                ),
+                Text("$numberMembers thành viên"),
                 Container(height: 8),
                 FilledButton(
-                    onPressed: () {},
+                  onPressed: () {},
                   child: SizedBox(
                     width: double.infinity,
                     child: Center(
-                      child: Text('Tham gia nhóm')
-                    )
-                  )
+                      child: Text('Tham gia nhóm'),
+                    ),
+                  ),
                 )
               ],
             ),
-          )
+          ),
         ],
       ),
     );
   }
-
 }

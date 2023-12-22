@@ -109,9 +109,9 @@ class _GroupListState extends State<GroupList> {
               shrinkWrap: true,
               itemBuilder: (context, index) {
                 return GroupCard(
-                  title: snapshot.data![index].name + '\n',
+                  groupName: snapshot.data![index].name + '\n',
                   imageId: snapshot.data![index].imageId,
-                  memberNumber: snapshot.data![index].memberNumber,
+                  numberMembers: snapshot.data![index].memberNumber,
                 );
               },
             );
@@ -136,9 +136,11 @@ class _GroupListState extends State<GroupList> {
       }
     } else if (widget.info['type'] == 'ofUser') {
       try {
+        print("user");
         var tmpGroupList = await groupListController.fetchGetAllOfUserApi();
         return tmpGroupList;
       } catch (e) {
+        print(e);
         return [];
       }
     } else {
@@ -150,13 +152,13 @@ class _GroupListState extends State<GroupList> {
 class GroupCard extends StatelessWidget {
   const GroupCard(
       {super.key,
-      required this.title,
+      required this.groupName,
       required this.imageId,
-      required this.memberNumber});
+      required this.numberMembers});
 
-  final String title;
+  final String groupName;
   final String imageId;
-  final int memberNumber;
+  final int numberMembers;
 
   @override
   Widget build(BuildContext context) {
@@ -183,7 +185,7 @@ class GroupCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  title,
+                  groupName,
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.black,
@@ -193,15 +195,21 @@ class GroupCard extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  "$memberNumber thành viên",
+                  "$numberMembers thành viên",
                   style: TextStyle(fontSize: 14, color: Colors.black54),
                 ),
                 OutlinedButton(
                   onPressed: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const GroupDetail()));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => GroupDetail(
+                          groupName: this.groupName,
+                          imageId: this.imageId,
+                          numberMembers: this.numberMembers,
+                        ),
+                      ),
+                    );
                   },
                   style: OutlinedButton.styleFrom(
                       backgroundColor: Colors.green[100],
