@@ -16,11 +16,8 @@ class HomePage extends StatelessWidget {
       bottomNavigationBar: BottomNavigationBar(
           onTap: (index) {
             if (index == 1) {
-              Get.to(Groups(info: {
-                'type': 'all'
-              }));
-            }
-            else if (index == 2) {
+              Get.to(Groups());
+            } else if (index == 2) {
               Get.to(ProfilePage());
             }
           },
@@ -28,24 +25,23 @@ class HomePage extends StatelessWidget {
           selectedItemColor: backgroundGradientFirst,
           items: [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.group), label: 'Group'),
+            BottomNavigationBarItem(icon: Icon(Icons.group), label: 'Group'),
             BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-          ]
-      ),
+          ]),
       appBar: AppBar(
         flexibleSpace: Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20)),
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                backgroundGradientFirst,
-                backgroundGradientSecond,
-              ],
-            )
-          ),
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(20),
+                  bottomRight: Radius.circular(20)),
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  backgroundGradientFirst,
+                  backgroundGradientSecond,
+                ],
+              )),
         ),
         title: Container(
           padding: EdgeInsets.only(left: 8, top: 5, bottom: 5, right: 8),
@@ -54,9 +50,7 @@ class HomePage extends StatelessWidget {
             borderRadius: BorderRadius.circular(15),
           ),
           child: Row(
-            children: [
-              Icon(Icons.search)
-            ],
+            children: [Icon(Icons.search)],
           ),
         ),
       ),
@@ -66,40 +60,66 @@ class HomePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Các hội nhóm thiện nguyện", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
-              GroupCardList(info: {
-                'type': 'all',
-              },),
-              SizedBox(height: 20,),
+              Text(
+                "Các hội nhóm thiện nguyện",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+              ),
+              GroupCardList(
+                info: {
+                  'type': 'all',
+                },
+              ),
+              SizedBox(
+                height: 20,
+              ),
               Row(
                 children: [
-                Text("Các sự kiện sắp diễn ra", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
-                SizedBox(width: 10,),
-                InkWell(
-                  onTap: () {
-                    Get.to(ViewEvent());
-                  },
-                  child: Text(
-                    'Xem thêm',
-                    style: TextStyle(color: backgroundGradientFirst, fontSize: 16, fontWeight: FontWeight.w600),
+                  Text(
+                    "Các sự kiện sắp diễn ra",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
                   ),
-                )
-              ],),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Get.to(ViewEvent());
+                    },
+                    child: Text(
+                      'Xem thêm',
+                      style: TextStyle(
+                          color: backgroundGradientFirst,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  )
+                ],
+              ),
               EventCardList(info: {
                 'type': 'all',
               }),
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               Row(
                 children: [
-                  Text("Các yêu cầu trợ giúp", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
-                  SizedBox(width: 10,),
+                  Text(
+                    "Các yêu cầu trợ giúp",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
                   InkWell(
                     onTap: () {
                       Get.to(RequestView());
                     },
                     child: Text(
                       'Xem thêm',
-                      style: TextStyle(color: backgroundGradientFirst, fontSize: 16, fontWeight: FontWeight.w600),
+                      style: TextStyle(
+                          color: backgroundGradientFirst,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600),
                     ),
                   )
                 ],
