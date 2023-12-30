@@ -14,6 +14,7 @@ class _AuthEndPoints {
 
 class _GroupEndPoints {
   final String getAll = 'group/page/';
+  final String create = "group";
 
   String getAllOfUser(String accountID, int pageNumber) {
     return 'group/user/$accountID/page/$pageNumber';
