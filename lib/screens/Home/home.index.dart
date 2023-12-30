@@ -11,7 +11,6 @@ import 'package:multiplatform_app/widgets/request_card_list/request_card_list.in
 
 class App extends StatefulWidget {
   const App({super.key});
-
   @override
   State<StatefulWidget> createState() => _AppState();
 }
@@ -23,7 +22,6 @@ class _AppState extends State<App> {
     Groups(),
     ProfilePage()
   ];
-
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
