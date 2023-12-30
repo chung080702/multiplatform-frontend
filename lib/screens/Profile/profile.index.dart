@@ -26,21 +26,6 @@ class ProfilePage extends StatelessWidget {
     }
 
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-          onTap: (index) {
-            if (index == 0) {
-              Get.offAll(HomePage());
-            } else if (index == 1) {
-              Get.offAll(Groups());
-            }
-          },
-          currentIndex: 2,
-          selectedItemColor: backgroundGradientFirst,
-          items: [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-            BottomNavigationBarItem(icon: Icon(Icons.group), label: 'Group'),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-          ]),
       appBar: AppBar(
         actions: [
           PopupMenuButton<int>(

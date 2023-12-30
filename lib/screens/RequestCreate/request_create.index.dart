@@ -15,13 +15,13 @@ class RequestCreate extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            Get.offAll(ProfilePage());
-            requestCreateController.reset();
-          },
-        ),
+        // leading: IconButton(
+        //   icon: Icon(Icons.arrow_back_ios),
+        //   onPressed: () {
+        //     Get.ofAll(ProfilePage());
+        //     requestCreateController.reset();
+        //   },
+        // ),
         title: Text('Tạo yêu cầu trợ giúp'),
         centerTitle: true,
         actions: [
@@ -31,61 +31,65 @@ class RequestCreate extends StatelessWidget {
               onTap: () {
                 requestCreateController.fetchCreateRequestApi();
               },
-              child: Text('Thêm', style: TextStyle(
-                color: backgroundGradientFirst,
-                fontWeight: FontWeight.w600,
-              ),),
+              child: Text(
+                'Thêm',
+                style: TextStyle(
+                  color: backgroundGradientFirst,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
             ),
           )
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-          onTap: (index) {
-            if (index == 0) {
-              Get.offAll(HomePage());
-            }
-            else if (index == 2) {
-              Get.offAll(ProfilePage());
-            }
-          },
-          currentIndex: 2,
-          selectedItemColor: backgroundGradientFirst,
-          items: [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.notifications), label: 'Notifications'),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-          ]),
-      body: Obx(() => Container(
-        padding: EdgeInsets.all(20),
-        child: Column(
-          children: [
-            TextField(
-              controller: requestCreateController.titleTextController,
-              decoration: InputDecoration(
-                hintText: 'Tiêu đề',
-              ),
+      body: Container(
+        child: Obx(
+          () => Container(
+            padding: EdgeInsets.all(20),
+            child: Column(
+              children: [
+                TextField(
+                  controller: requestCreateController.titleTextController,
+                  decoration: InputDecoration(
+                    hintText: 'Tiêu đề',
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                TextField(
+                  controller: requestCreateController.contentTextController,
+                  maxLines: 5,
+                  decoration: InputDecoration(
+                    hintText: 'Nội dung',
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                requestCreateController.image.value.path.isEmpty
+                    ? Text(
+                        'No image selected.',
+                        style: TextStyle(color: Colors.black),
+                      )
+                    : Image.file(
+                        File(requestCreateController.image.value.path),
+                        height: 300,
+                        fit: BoxFit.cover,
+                      ),
+                SizedBox(
+                  height: 20,
+                ),
+                ElevatedButton(
+                  onPressed: () =>
+                      requestCreateController.pickImage(ImageSource.gallery),
+                  child: Text('Chọn ảnh từ thư viện'),
+                )
+              ],
             ),
-            SizedBox(height: 20,),
-            TextField(
-              controller: requestCreateController.contentTextController,
-              maxLines: 5,
-              decoration: InputDecoration(
-                hintText: 'Nội dung',
-              ),
-            ),
-            SizedBox(height: 10,),
-            requestCreateController.image.value.path.isEmpty
-                ? Text('No image selected.', style: TextStyle(color: Colors.black),)
-                : Image.file(File(requestCreateController.image.value.path), height: 300, fit: BoxFit.cover,),
-            SizedBox(height: 20,),
-            ElevatedButton(
-              onPressed: () => requestCreateController.pickImage(ImageSource.gallery),
-              child: Text('Chọn ảnh từ thư viện'),
-            )
-          ],
+          ),
         ),
-      ),),
+      ),
     );
   }
 }

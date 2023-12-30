@@ -15,23 +15,26 @@ class LoginController extends GetxController {
   final usernameTextController = TextEditingController();
   final passwordTextController = TextEditingController();
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-  
+
   Future<void> fetchLoginApi() async {
     try {
       var headers = {'Content-Type': 'application/json'};
-      var url = Uri.parse(ApiEndPoints.baseURL + ApiEndPoints.authEndPoints.login);
+      var url =
+          Uri.parse(ApiEndPoints.baseURL + ApiEndPoints.authEndPoints.login);
       Map body = {
         'username': usernameTextController.text,
         'password': passwordTextController.text,
       };
 
-      var response = await http.post(url, headers: headers, body: jsonEncode(body));
+      var response =
+          await http.post(url, headers: headers, body: jsonEncode(body));
       if (response.statusCode == 200) {
         var responseData = jsonDecode(response.body);
         String token = responseData['token'];
         final SharedPreferences? prefs = await _prefs;
         await prefs?.setString("token", token);
-        accountController.account.value = User.fromJson(responseData['account']);
+        accountController.account.value =
+            User.fromJson(responseData['account']);
         usernameTextController.clear();
         passwordTextController.clear();
         Get.snackbar(
@@ -39,18 +42,20 @@ class LoginController extends GetxController {
           'Login successful!',
           snackPosition: SnackPosition.BOTTOM,
         );
-        Get.offAll(HomePage());
+        Get.offAll(App());
       } else {
         throw response.body ?? "Unknown Error Occured";
       }
     } catch (e) {
-      showDialog(context: Get.context!, builder: (context) {
-        return SimpleDialog(
-          title: Text('Error'),
-          contentPadding: EdgeInsets.all(20),
-          children: [Text(e.toString())],
-        );
-      });
+      showDialog(
+          context: Get.context!,
+          builder: (context) {
+            return SimpleDialog(
+              title: Text('Error'),
+              contentPadding: EdgeInsets.all(20),
+              children: [Text(e.toString())],
+            );
+          });
     }
   }
 }

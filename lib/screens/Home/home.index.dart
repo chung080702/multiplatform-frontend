@@ -9,25 +9,49 @@ import 'package:multiplatform_app/widgets/event_card_list/event_card_list.index.
 import 'package:multiplatform_app/widgets/group_card_list/group_card_list.index.dart';
 import 'package:multiplatform_app/widgets/request_card_list/request_card_list.index.dart';
 
+class App extends StatefulWidget {
+  const App({super.key});
+  @override
+  State<StatefulWidget> createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+  int _selectedIndex = 0;
+  static List<Widget> _widgetOptions = <Widget>[
+    HomePage(),
+    Groups(),
+    ProfilePage()
+  ];
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Scaffold(
+      body: Container(
+        child: _widgetOptions.elementAt(_selectedIndex),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.group), label: 'Group'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+        ],
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+      ),
+    );
+  }
+}
+
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-          onTap: (index) {
-            if (index == 1) {
-              Get.to(Groups());
-            } else if (index == 2) {
-              Get.to(ProfilePage());
-            }
-          },
-          currentIndex: 0,
-          selectedItemColor: backgroundGradientFirst,
-          items: [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-            BottomNavigationBarItem(icon: Icon(Icons.group), label: 'Group'),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-          ]),
       appBar: AppBar(
         flexibleSpace: Container(
           decoration: BoxDecoration(

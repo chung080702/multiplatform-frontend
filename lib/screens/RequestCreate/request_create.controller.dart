@@ -35,7 +35,8 @@ class RequestCreateController extends GetxController {
     try {
       final SharedPreferences? prefs = await _prefs;
       String token = prefs!.getString('token')!;
-      var url = Uri.parse(ApiEndPoints.baseURL + ApiEndPoints.requestEndPoints.createRequest);
+      var url = Uri.parse(
+          ApiEndPoints.baseURL + ApiEndPoints.requestEndPoints.createRequest);
       var headers = {
         'Content-Type': 'application/json',
         'Authorization': token,
@@ -46,17 +47,17 @@ class RequestCreateController extends GetxController {
       request.fields['description'] = contentTextController.text;
       final file = File(image.value.path);
       final fileName = '${DateTime.now().millisecondsSinceEpoch}.png';
-      request.files.add(await http.MultipartFile.fromPath('image', file.path, filename: fileName));
-
+      request.files.add(await http.MultipartFile.fromPath('image', file.path,
+          filename: fileName));
 
       var response = await request.send();
       if (response.statusCode == 200) {
+        Get.back();
         Get.snackbar(
           'Success',
           'Request has been created',
           snackPosition: SnackPosition.BOTTOM,
         );
-        Get.offAll(ProfilePage());
       } else {
         throw response;
       }
