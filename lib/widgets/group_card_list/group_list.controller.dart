@@ -41,7 +41,7 @@ class GroupListController extends GetxController {
       if (response.statusCode == 200) {
         var data = await json.decode(utf8.decode(response.bodyBytes));
         List<dynamic> jsonGroups = data['groups'];
-        List<Group> groups = jsonGroups.map((item) => Group.fromJson(item['groupId'])).toList();
+        List<Group> groups = jsonGroups.map((item) => Group.fromJson(item)).toList();
         return groups;
       } else {
         return [];
