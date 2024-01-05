@@ -8,9 +8,9 @@ import 'dart:convert';
 class RequestListController extends GetxController {
   final accountController = Get.find<AccountController>();
 
-  Future<List<Request>> fetchGetAllRequestApi() async {
+  Future<List<Request>> fetchGetAllRequestApi(int page) async {
     try {
-      var url = Uri.parse(ApiEndPoints.baseURL + ApiEndPoints.requestEndPoints.getAll(1));
+      var url = Uri.parse(ApiEndPoints.baseURL + ApiEndPoints.requestEndPoints.getAll(page));
       var response = await http.get(url);
       if (response.statusCode == 200) {
         var data = await json.decode(utf8.decode(response.bodyBytes));

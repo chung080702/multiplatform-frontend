@@ -18,12 +18,14 @@ class GroupListController extends GetxController {
       Map<String, String> headers = {
         'Authorization': token,
       };
-      var url = Uri.parse(ApiEndPoints.baseURL + ApiEndPoints.groupEndPoints.getAll + "1");
+      var url = Uri.parse(
+          ApiEndPoints.baseURL + ApiEndPoints.groupEndPoints.getAll + "1");
       var response = await http.get(url, headers: headers);
       if (response.statusCode == 200) {
         var data = await json.decode(utf8.decode(response.bodyBytes));
         List<dynamic> jsonGroups = data['groups'];
-        List<Group> groups = jsonGroups.map((item) => Group.fromJson(item)).toList();
+        List<Group> groups =
+            jsonGroups.map((item) => Group.fromJson(item)).toList();
         return groups;
       } else {
         return [];
@@ -36,7 +38,8 @@ class GroupListController extends GetxController {
   Future<List<Group>> fetchGetAllOfUserApi() async {
     try {
       var accountID = accountController.account.value?.id;
-      var url = Uri.parse(ApiEndPoints.baseURL + ApiEndPoints.groupEndPoints.getAllOfUser(accountID!, 1));
+      var url = Uri.parse(ApiEndPoints.baseURL +
+          ApiEndPoints.groupEndPoints.getAllOfUser(accountID!, 1));
       var response = await http.get(url);
       if (response.statusCode == 200) {
         var data = await json.decode(utf8.decode(response.bodyBytes));
@@ -46,7 +49,7 @@ class GroupListController extends GetxController {
       } else {
         return [];
       }
-    } catch(e) {
+    } catch (e) {
       return [];
     }
   }

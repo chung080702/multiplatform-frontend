@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 import 'package:multiplatform_app/general/constants/app_color.dart';
 import 'package:multiplatform_app/general/constants/app_icon.dart';
 import 'package:multiplatform_app/general/constants/app_text_style.dart';
@@ -106,11 +107,12 @@ class DetailEvent extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "From ${DateTime.parse(startTime).toLocal()}",
+                        "From : ${DateFormat.Hms('vi').format(DateTime.parse(startTime))}-${DateFormat.yMd('vi').format(DateTime.parse(startTime))}",
                         style: AppTextStyle.textStyle_14_700_20
                             .merge(const TextStyle(color: AppColor.dark)),
                       ),
-                      Text("To ${DateTime.parse(endTime).toLocal()}",
+                      Text(
+                          "To : ${DateFormat.Hms('vi').format(DateTime.parse(endTime))}-${DateFormat.yMd('vi').format(DateTime.parse(endTime))}",
                           style: AppTextStyle.textStyle_14_700_20
                               .merge(const TextStyle(color: AppColor.dark))),
                     ],
