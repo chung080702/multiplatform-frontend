@@ -31,7 +31,7 @@ class _FileEndPoints {
 
 class _EventEndPoints {
   String getAll(int pageNumber) {
-    return 'event/page/$pageNumber';
+    return 'event/page/$pageNumber/search';
   }
 }
 
@@ -39,10 +39,10 @@ class _RequestEndPoints {
   final String createRequest = 'supportRequest';
 
   String getAll(int pageNumber) {
-    return 'supportRequest/page/$pageNumber';
+    return 'supportRequest/page/$pageNumber/search';
   }
 
   String getAllOfUser(String accountID, int pageNumber) {
-    return 'supportRequest/account/$accountID/page/$pageNumber';
+    return 'supportRequest/account/$accountID/page/$pageNumber/search';
   }
 }

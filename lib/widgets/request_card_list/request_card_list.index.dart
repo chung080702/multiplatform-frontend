@@ -60,7 +60,7 @@ class _RequestCardListState extends State<RequestCardList> {
     if (widget.info['type'] == 'all') {
       try {
         var tmpRequestList =
-        await requestListController.fetchGetAllRequestApi();
+        await requestListController.fetchGetAllRequestApi(1);
         return tmpRequestList;
       } catch (e) {
         return [];

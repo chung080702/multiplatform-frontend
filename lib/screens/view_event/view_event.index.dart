@@ -86,13 +86,6 @@ class _ViewEventState extends State<ViewEvent> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: InkWell(
-          onTap: () {},
-          child: const Icon(
-            Icons.arrow_back,
-          ),
-        ),
-        leadingWidth: 24,
         title: Row(
           children: [
             Expanded(

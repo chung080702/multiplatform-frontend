@@ -16,6 +16,8 @@ class RequestCreateController extends GetxController {
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   void reset() {
+    titleTextController.clear();
+    contentTextController.clear();
     image.value = XFile('');
     imagePicker.value = ImagePicker();
   }
