@@ -93,6 +93,7 @@ class _GroupListState extends State<GroupList> {
               shrinkWrap: true,
               itemBuilder: (context, index) {
                 return GroupCard(
+                  groupId: snapshot.data![index].id,
                   groupName: snapshot.data![index].name + '\n',
                   imageId: snapshot.data![index].imageId,
                   numberMembers: snapshot.data![index].memberNumber,
@@ -136,10 +137,12 @@ class _GroupListState extends State<GroupList> {
 class GroupCard extends StatelessWidget {
   const GroupCard(
       {super.key,
+      required this.groupId,
       required this.groupName,
       required this.imageId,
       required this.numberMembers});
 
+  final String groupId;
   final String groupName;
   final String imageId;
   final int numberMembers;
@@ -188,6 +191,7 @@ class GroupCard extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) => GroupDetail(
+                          groupId: this.groupId,
                           groupName: this.groupName,
                           imageId: this.imageId,
                           numberMembers: this.numberMembers,

@@ -4,11 +4,13 @@ import 'package:multiplatform_app/screens/Group/group.member-list.dart';
 class GroupDetail extends StatelessWidget {
   const GroupDetail({
     super.key,
+    required this.groupId,
     required this.groupName,
     required this.imageId,
     required this.numberMembers,
   });
 
+  final String groupId;
   final String groupName;
   final String imageId;
   final int numberMembers;
@@ -44,7 +46,14 @@ class GroupDetail extends StatelessWidget {
                       Text("Thành viên")
                     ],
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MemberList(
+                                  groupId: groupId,
+                                )));
+                  },
                 ),
                 MenuItemButton(
                   child: Row(
@@ -61,7 +70,10 @@ class GroupDetail extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const MemberList()));
+                            builder: (context) => MemberList(
+                                  groupId: groupId,
+                                  type: "joinRequests",
+                                )));
                   },
                 ),
                 MenuItemButton(
