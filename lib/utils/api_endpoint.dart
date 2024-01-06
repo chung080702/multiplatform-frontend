@@ -80,4 +80,12 @@ class _RequestEndPoints {
   String getPersonalsContribute(String supportRequestId, int page) {
     return "supportRequest/$supportRequestId/contribute/page/$page";
   }
+
+  String acceptPersonalContribute(String personalContributeId) {
+    return "supportRequest/contribute/$personalContributeId";
+  }
+
+  String rejectPersonalContribute(String personalContributeId) {
+    return "supportRequest/contribute/$personalContributeId";
+  }
 }

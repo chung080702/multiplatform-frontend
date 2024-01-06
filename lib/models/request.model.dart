@@ -25,6 +25,14 @@ class Request {
     if (images.isNotEmpty) {
       tmpImage = json['imageIds'][0];
     }
-    return Request(id: json['_id'], phone: json['accountId']['telephone'], email: json['accountId']['email'], title: json['title'], description: json['description'], image: tmpImage, createdAt: json['createAt'], status: json['status']);
+    return Request(
+        id: json['_id'],
+        phone: json['accountId']['telephone'],
+        email: json['accountId']['email'],
+        title: json['title'],
+        description: json['description'],
+        image: tmpImage,
+        createdAt: json['createAt'],
+        status: json['status']);
   }
 }
