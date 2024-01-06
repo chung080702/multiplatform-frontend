@@ -246,7 +246,7 @@ class _AddEventState extends State<AddEvent> {
                               ],
                             ),
                             IgnorePointer(
-                              ignoring: isSupportRequest,
+                              ignoring: !isSupportRequest,
                               child: Opacity(
                                 opacity: isSupportRequest ? 1 : 0.5,
                                 child: DropdownButtonFormField2<Request>(
@@ -404,6 +404,7 @@ class _AddEventState extends State<AddEvent> {
                           endTimeController.text,
                           addressController.text,
                           contentController.text,
+                          selectedRequest?.id,
                           images);
                       if (result) {
                       } else {
