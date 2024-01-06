@@ -137,7 +137,7 @@ class _DirectSupportState extends State<DirectSupport> {
                       'Gửi yêu cầu trợ giúp thành công',
                       snackPosition: SnackPosition.BOTTOM,
                     );
-                    Get.to(RequestDetail(request: widget.request));
+                    Get.back();
                   } else {}
                 },
                 child: Container(
