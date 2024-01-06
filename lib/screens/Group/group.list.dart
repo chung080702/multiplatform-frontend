@@ -86,17 +86,16 @@ class _GroupListState extends State<GroupList> {
           if (snapshot.hasData) {
             return GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 0.7,
-                  mainAxisExtent: 288),
+                crossAxisCount: 2,
+                childAspectRatio: 0.7,
+              ),
               itemCount: snapshot.data!.length,
               shrinkWrap: true,
+              padding: EdgeInsets.all(4),
               itemBuilder: (context, index) {
                 return GroupCard(
-                  groupId: snapshot.data![index].id,
-                  groupName: snapshot.data![index].name + '\n',
-                  imageId: snapshot.data![index].imageId,
-                  numberMembers: snapshot.data![index].memberNumber,
+                  type: widget.info['type'],
+                  group: snapshot.data![index],
                 );
               },
             );
@@ -135,70 +134,78 @@ class _GroupListState extends State<GroupList> {
 }
 
 class GroupCard extends StatelessWidget {
-  const GroupCard(
-      {super.key,
-      required this.groupId,
-      required this.groupName,
-      required this.imageId,
-      required this.numberMembers});
-
-  final String groupId;
-  final String groupName;
-  final String imageId;
-  final int numberMembers;
+  GroupCard({super.key, required this.group, this.type = "ofUser"});
+  String type;
+  final Group group;
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-      clipBehavior: Clip.antiAliasWithSaveLayer,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          AspectRatio(
-            aspectRatio: 4 / 3,
-            child: Image.network(
-              'https://multiplatform-backend.vercel.app/file/$imageId',
-              width: double.infinity,
-              fit: BoxFit.fill,
+    return GestureDetector(
+      onTap: () {
+        if (type == "ofUser") {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => GroupDetail(
+                haveJoined: true,
+                group: group,
+              ),
             ),
-          ),
-          Container(
-            padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
-            width: double.infinity,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  groupName,
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
+          );
+        } else {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => GroupDetail(
+                  haveJoined: false,
+                  group: group,
+                ),
+              ));
+        }
+      },
+      child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            AspectRatio(
+              aspectRatio: 4 / 3,
+              child: Image.network(
+                'https://multiplatform-backend.vercel.app/file/${group.imageId}',
+                width: double.infinity,
+                fit: BoxFit.fill,
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    group.name,
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                Text(
-                  "$numberMembers thành viên",
-                  style: TextStyle(fontSize: 14, color: Colors.black54),
-                ),
-                OutlinedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => GroupDetail(
-                          groupId: this.groupId,
-                          groupName: this.groupName,
-                          imageId: this.imageId,
-                          numberMembers: this.numberMembers,
-                        ),
-                      ),
-                    );
-                  },
+                  Text(
+                    "${group.memberNumber} thành viên",
+                    style: TextStyle(fontSize: 14, color: Colors.black54),
+                  ),
+                ],
+              ),
+            ),
+            if (type != "ofUser")
+              Container(
+                padding: EdgeInsets.fromLTRB(8, 0, 8, 4),
+                child: OutlinedButton(
+                  onPressed: () {},
                   style: OutlinedButton.styleFrom(
                       backgroundColor: Colors.green[100],
                       side: BorderSide(style: BorderStyle.none)),
@@ -207,11 +214,18 @@ class GroupCard extends StatelessWidget {
                       child: Center(
                         child: Text("Tham gia"),
                       )),
-                )
-              ],
-            ),
-          ),
-        ],
+                ),
+              ),
+            if (type == "ofUser")
+              Container(
+                padding: EdgeInsets.fromLTRB(8, 0, 8, 4),
+                child: Text(
+                  group.description,
+                  style: TextStyle(color: Colors.black54),
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }

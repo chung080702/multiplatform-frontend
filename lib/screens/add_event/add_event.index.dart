@@ -62,7 +62,7 @@ class _AddEventState extends State<AddEvent> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 0,
+        title: Text("Thêm sự kiện"),
         backgroundColor: AppColor.greySoft,
         systemOverlayStyle:
             const SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
@@ -75,14 +75,6 @@ class _AddEventState extends State<AddEvent> {
               BoxConstraints(minHeight: MediaQuery.of(context).size.height),
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8),
-                child: Text(
-                  "Thêm sự kiện",
-                  style: AppTextStyle.textStyle_24_600_36
-                      .merge(const TextStyle(color: AppColor.dark)),
-                ),
-              ),
               Form(
                   key: _formKey,
                   child: Column(
