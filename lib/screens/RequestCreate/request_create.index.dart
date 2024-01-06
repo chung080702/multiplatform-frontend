@@ -28,7 +28,7 @@ class _RequestCreateState extends State<RequestCreate> {
               leading: IconButton(
                 icon: Icon(Icons.arrow_back_ios),
                 onPressed: () {
-                  Get.offAll(ProfilePage());
+                  Get.back();
                   requestCreateController.reset();
                 },
               ),
