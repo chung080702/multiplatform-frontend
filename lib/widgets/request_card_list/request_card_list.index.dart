@@ -27,19 +27,21 @@ class _RequestCardListState extends State<RequestCardList> {
 
   @override
   Widget build(BuildContext context) {
-    return isLoading ? FutureBuilder(
-        future: requestList,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else {
-            isLoading = false;
-            requests = snapshot.data as List<Request>;
-            return buildGroupCardListUI(snapshot.data as List<Request>);
-          }
-        }) : buildGroupCardListUI(requests);
+    return isLoading
+        ? FutureBuilder(
+            future: requestList,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasError) {
+                return Center(child: Text('Error: ${snapshot.error}'));
+              } else {
+                isLoading = false;
+                requests = snapshot.data as List<Request>;
+                return buildGroupCardListUI(snapshot.data as List<Request>);
+              }
+            })
+        : buildGroupCardListUI(requests);
   }
 
   Widget buildGroupCardListUI(List<Request> requestList) {
@@ -51,8 +53,13 @@ class _RequestCardListState extends State<RequestCardList> {
         itemBuilder: (context, index) {
           return Row(
             children: [
-              RequestCard(request: requestList[index]),
-              SizedBox(width: 5,),
+              RequestCard(
+                request: requestList[index],
+                isOfUser: widget.info['type'] == 'all' ? false : true,
+              ),
+              SizedBox(
+                width: 5,
+              ),
             ],
           );
         },
@@ -64,21 +71,20 @@ class _RequestCardListState extends State<RequestCardList> {
     if (widget.info['type'] == 'all') {
       try {
         var tmpRequestList =
-        await requestListController.fetchGetAllRequestApi(1);
+            await requestListController.fetchGetAllRequestApi(1);
         return tmpRequestList;
       } catch (e) {
         return [];
       }
-    }
-    else if (widget.info['type'] == 'ofUser') {
+    } else if (widget.info['type'] == 'ofUser') {
       try {
-        var tmpRequestList = await requestListController.fetchGetAllRequestOfUserApi();
+        var tmpRequestList =
+            await requestListController.fetchGetAllRequestOfUserApi();
         return tmpRequestList;
       } catch (e) {
         return [];
       }
-    }
-    else {
+    } else {
       return [];
     }
   }

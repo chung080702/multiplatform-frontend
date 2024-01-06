@@ -20,20 +20,20 @@ class RequestBrief extends StatelessWidget {
           children: [
             request.image != ''
                 ? Image.network(
-              ApiEndPoints.baseURL +
-                  ApiEndPoints.fileEndPoints.getFile +
-                  request.image,
-              height: 100,
-              width: 100,
-              fit: BoxFit.cover,
-            )
+                    ApiEndPoints.baseURL +
+                        ApiEndPoints.fileEndPoints.getFile +
+                        request.image,
+                    height: 100,
+                    width: 100,
+                    fit: BoxFit.cover,
+                  )
                 : Container(
-              height: 150,
-              width: 100,
-              child: Center(
-                child: Text('Yêu cầu trợ giúp'),
-              ),
-            ),
+                    height: 150,
+                    width: 100,
+                    child: Center(
+                      child: Text('Yêu cầu trợ giúp'),
+                    ),
+                  ),
             SizedBox(
               width: 10,
             ),
@@ -57,12 +57,12 @@ class RequestBrief extends StatelessWidget {
                         color: request.status == 'Pending'
                             ? Colors.grey
                             : request.status == 'Accepted'
-                            ? Colors.green
-                            : Colors.red,
+                                ? Colors.green
+                                : Colors.red,
                         borderRadius: BorderRadius.circular(3),
                       ),
                       padding:
-                      EdgeInsets.only(right: 8, left: 8, top: 3, bottom: 3),
+                          EdgeInsets.only(right: 8, left: 8, top: 3, bottom: 3),
                       child: Text(
                         request.status,
                         style: TextStyle(
@@ -82,7 +82,10 @@ class RequestBrief extends StatelessWidget {
         ),
       ),
       onTap: () {
-        Get.to(RequestDetail(request: request));
+        Get.to(RequestDetail(
+          request: request,
+          isOfUser: false,
+        ));
       },
     );
   }
