@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:multiplatform_app/general_controller/account.controller.dart';
 import 'package:multiplatform_app/models/event.model.dart';
 import 'package:multiplatform_app/models/join_group_request.model.dart';
+import 'package:multiplatform_app/models/member.model.dart';
 import 'package:multiplatform_app/utils/api_endpoint.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -123,6 +124,27 @@ class GroupController extends GetxController {
         List<dynamic> jsonEvents = data['events'];
         List<Event> events = jsonEvents.map((json) => Event.fromJson(json)).toList();
         return events;
+      } else {
+        return [];
+      }
+    } catch (e) {
+      return [];
+    }
+  }
+
+
+  // lay danh sach thanh vien nhom
+  Future<List<Member>> fetchGetAllMemberOfGroupAPI(String groupID, int page) async {
+    try {
+      var url = Uri.parse(
+        ApiEndPoints.baseURL + ApiEndPoints.groupEndPoints.getMembersOfGroup(groupID, page)
+      );
+      var response = await http.get(url);
+      if (response.statusCode == 200) {
+        var data = await json.decode(utf8.decode(response.bodyBytes));
+        List<dynamic> jsonMembers = data['members'];
+        List<Member> members = jsonMembers.map((json) => Member.fromJson(json)).toList();
+        return members;
       } else {
         return [];
       }

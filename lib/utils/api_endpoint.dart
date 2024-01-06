@@ -45,6 +45,10 @@ class _GroupEndPoints {
   String getEventsOfGroup(String groupID, int page) {
     return 'group/$groupID/event/page/$page';
   }
+
+  String getMembersOfGroup(String groupID, int page) {
+    return 'group/$groupID/member/page/$page';
+  }
 }
 
 class _FileEndPoints {
