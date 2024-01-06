@@ -1,10 +1,13 @@
 import 'dart:io';
+
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:multiplatform_app/general/constants/app_color.dart';
 import 'package:multiplatform_app/general/constants/app_text_style.dart';
 import 'package:multiplatform_app/general/widgets/input_default.dart';
+import 'package:multiplatform_app/models/request.model.dart';
 import 'package:multiplatform_app/screens/add_event/add_event.controller.dart';
 
 class AddEvent extends StatefulWidget {
@@ -24,6 +27,10 @@ class _AddEventState extends State<AddEvent> {
   AddEventController addEventController = AddEventController();
   final _formKey = GlobalKey<FormState>();
   List<File> images = [];
+  List<Request> requestEvents = [];
+  Request? selectedRequest;
+  int page = 1;
+  bool isSupportRequest = true;
 
   @override
   void initState() {
@@ -33,6 +40,11 @@ class _AddEventState extends State<AddEvent> {
     endTimeController = TextEditingController();
     addressController = TextEditingController();
     contentController = TextEditingController();
+    addEventController.getRequests(page).then((value) {
+      setState(() {
+        requestEvents = value;
+      });
+    });
     super.initState();
   }
 
@@ -209,6 +221,110 @@ class _AddEventState extends State<AddEvent> {
                         },
                         textInputType: TextInputType.text,
                         readOnly: false,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 4),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  "Yêu cầu trợ giúp",
+                                  style: AppTextStyle.textStyle_14_600_20.merge(
+                                      const TextStyle(color: AppColor.dark)),
+                                ),
+                                Checkbox(
+                                  value: isSupportRequest,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      isSupportRequest =
+                                          value ?? isSupportRequest;
+                                    });
+                                  },
+                                )
+                              ],
+                            ),
+                            IgnorePointer(
+                              ignoring: isSupportRequest,
+                              child: Opacity(
+                                opacity: isSupportRequest ? 1 : 0.5,
+                                child: DropdownButtonFormField2<Request>(
+                                  isExpanded: true,
+                                  decoration: InputDecoration(
+                                    contentPadding:
+                                        const EdgeInsets.symmetric(vertical: 8),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    // Add more decoration..
+                                  ),
+                                  hint: Text(
+                                    'Chọn yêu cầu trợ giúp',
+                                    style: AppTextStyle.textStyle_14_400_20
+                                        .merge(const TextStyle(
+                                            color: AppColor.grey)),
+                                  ),
+                                  items: requestEvents
+                                      .map((item) => DropdownMenuItem<Request>(
+                                            value: item,
+                                            child: Row(
+                                              children: [
+                                                Expanded(
+                                                    child: Text(
+                                                  item.title,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: AppTextStyle
+                                                      .textStyle_14_400_20
+                                                      .merge(const TextStyle(
+                                                          color:
+                                                              AppColor.grey)),
+                                                )),
+                                                Expanded(
+                                                    child: Text(
+                                                  "telephone: ${item.phone}",
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: AppTextStyle
+                                                      .textStyle_14_400_20
+                                                      .merge(const TextStyle(
+                                                          color:
+                                                              AppColor.grey)),
+                                                ))
+                                              ],
+                                            ),
+                                          ))
+                                      .toList(),
+                                  onChanged: (value) {
+                                    selectedRequest = value;
+                                  },
+                                  onSaved: (value) {},
+                                  buttonStyleData: const ButtonStyleData(
+                                    padding: EdgeInsets.only(right: 8),
+                                  ),
+                                  iconStyleData: const IconStyleData(
+                                    icon: Icon(
+                                      Icons.arrow_drop_down,
+                                      color: Colors.black45,
+                                    ),
+                                    iconSize: 24,
+                                  ),
+                                  dropdownStyleData: DropdownStyleData(
+                                    maxHeight: 120,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                  ),
+                                  menuItemStyleData: const MenuItemStyleData(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 16),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
