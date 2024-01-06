@@ -5,11 +5,11 @@ import 'package:http/http.dart' as http;
 import 'package:multiplatform_app/utils/api_endpoint.dart';
 
 class ViewEventController {
-  Future<List<Event>> getEvents(int page) async {
+  Future<List<Event>> getEvents(int page, String? filter) async {
     try {
       var headers = {'Content-Type': 'application/json'};
-      var url = Uri.parse(
-          ApiEndPoints.baseURL + ApiEndPoints.eventEndPoints.getAll(page));
+      var url = Uri.parse(ApiEndPoints.baseURL +
+          ApiEndPoints.eventEndPoints.getAll(page, filter));
       var response = await http.get(
         url,
         headers: headers,
