@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:multiplatform_app/general/constants/app_text_style.dart';
 import 'package:multiplatform_app/models/request.model.dart';
-import 'package:multiplatform_app/screens/Home/home.index.dart';
+import 'package:multiplatform_app/screens/direct_support/direct_support.index.dart';
 import 'package:multiplatform_app/utils/api_endpoint.dart';
-import 'package:multiplatform_app/utils/color.dart';
 
 class RequestDetail extends StatelessWidget {
   Request request;
@@ -18,19 +17,32 @@ class RequestDetail extends StatelessWidget {
         title: const Text('Yêu cầu trợ giúp'),
         centerTitle: true,
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 10),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.green,
-                borderRadius: BorderRadius.circular(3),
-              ),
-              padding:
-                  const EdgeInsets.only(right: 8, left: 8, top: 3, bottom: 3),
-              child: const Text(
-                "Help",
-                style: TextStyle(
-                  color: Colors.white,
+          IgnorePointer(
+            ignoring: request.status == 'Pending',
+            child: Opacity(
+              opacity: request.status == 'Pending' ? 0.2 : 1,
+              child: InkWell(
+                onTap: () {
+                  Get.to(DirectSupport(
+                    request: request,
+                  ));
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.green,
+                      borderRadius: BorderRadius.circular(3),
+                    ),
+                    padding: const EdgeInsets.only(
+                        right: 8, left: 8, top: 3, bottom: 3),
+                    child: const Text(
+                      "Support",
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),

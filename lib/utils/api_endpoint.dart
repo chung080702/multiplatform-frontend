@@ -45,4 +45,8 @@ class _RequestEndPoints {
   String getAllOfUser(String accountID, int pageNumber) {
     return 'supportRequest/account/$accountID/page/$pageNumber/search';
   }
+
+  String createPersonalContribute(String supportRequestId) {
+    return "supportRequest/$supportRequestId/contribute";
+  }
 }
