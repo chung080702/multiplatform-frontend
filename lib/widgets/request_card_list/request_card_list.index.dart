@@ -15,6 +15,8 @@ class RequestCardList extends StatefulWidget {
 
 class _RequestCardListState extends State<RequestCardList> {
   late Future<List<Request>> requestList;
+  List<Request> requests = [];
+  bool isLoading = true;
   final requestListController = Get.put(RequestListController());
 
   @override
@@ -25,7 +27,7 @@ class _RequestCardListState extends State<RequestCardList> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
+    return isLoading ? FutureBuilder(
         future: requestList,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -33,9 +35,11 @@ class _RequestCardListState extends State<RequestCardList> {
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
+            isLoading = false;
+            requests = snapshot.data as List<Request>;
             return buildGroupCardListUI(snapshot.data as List<Request>);
           }
-        });
+        }) : buildGroupCardListUI(requests);
   }
 
   Widget buildGroupCardListUI(List<Request> requestList) {

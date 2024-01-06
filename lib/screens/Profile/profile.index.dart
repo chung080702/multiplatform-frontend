@@ -14,6 +14,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilePage extends StatelessWidget {
   final accountController = Get.find<AccountController>();
+
   @override
   Widget build(BuildContext context) {
     void onSelected(BuildContext context, int item) async {

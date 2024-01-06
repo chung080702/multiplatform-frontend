@@ -13,15 +13,41 @@ class _AuthEndPoints {
 }
 
 class _GroupEndPoints {
-  final String getAll = 'group/page/';
+  String getAll(int pageNumber) {
+    return 'group/page/$pageNumber/search';
+  }
   final String create = "group";
 
   String getAllOfUser(String accountID, int pageNumber) {
-    return 'group/user/$accountID/page/$pageNumber';
+    return 'group/user/$accountID/page/$pageNumber/search';
   }
 
   String createEvent(String groupId) {
     return "group/$groupId/event";
+  }
+
+  String joinGroup(int groupID) {
+    return 'group/$groupID/join';
+  }
+
+  String getAllJoinGroupRequest(String groupID, int page) {
+    return 'group/$groupID/join/page/$page';
+  }
+
+  String acceptJoinGroupRequest(String groupID, String joinRequestID) {
+    return 'group/$groupID/join/$joinRequestID';
+  }
+
+  String rejectJoinGroupRequest(String groupID, String joinRequestID) {
+    return 'group/$groupID/join/$joinRequestID';
+  }
+
+  String getEventsOfGroup(String groupID, int page) {
+    return 'group/$groupID/event/page/$page';
+  }
+
+  String getMembersOfGroup(String groupID, int page) {
+    return 'group/$groupID/member/page/$page';
   }
 }
 
