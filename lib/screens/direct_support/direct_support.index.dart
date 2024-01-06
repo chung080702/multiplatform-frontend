@@ -23,6 +23,12 @@ class _DirectSupportState extends State<DirectSupport> {
       DirectSupportController();
   List<File> images = [];
 
+  void removePicker(File image) {
+    setState(() {
+      images.removeWhere((item) => item == image);
+    });
+  }
+
   Future<void> pickImage() async {
     final picker = ImagePicker();
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
@@ -70,14 +76,30 @@ class _DirectSupportState extends State<DirectSupport> {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
-                    ...images.map((image) => Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 8),
-                          height: double.infinity,
-                          width: 150,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: Image.file(image, fit: BoxFit.cover),
-                          ),
+                    ...images.map((image) => Stack(
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.symmetric(horizontal: 8),
+                              height: double.infinity,
+                              width: 150,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8),
+                                child: Image.file(image, fit: BoxFit.cover),
+                              ),
+                            ),
+                            Positioned(
+                                right: 0,
+                                top: -10,
+                                child: IconButton(
+                                  onPressed: () {
+                                    removePicker(image);
+                                  },
+                                  icon: const Icon(
+                                    Icons.delete_outlined,
+                                    color: AppColor.red,
+                                  ),
+                                ))
+                          ],
                         )),
                     InkWell(
                       onTap: () {
@@ -110,6 +132,11 @@ class _DirectSupportState extends State<DirectSupport> {
                   bool isSuccess = await directSupportController
                       .createPersonalContribute(images, widget.request.id);
                   if (isSuccess) {
+                    Get.snackbar(
+                      'Gửi yêu cầu trợ giúp',
+                      'Gửi yêu cầu trợ giúp thành công',
+                      snackPosition: SnackPosition.BOTTOM,
+                    );
                     Get.to(RequestDetail(request: widget.request));
                   } else {}
                 },
