@@ -38,7 +38,7 @@ class _MemberListState extends State<MemberList> {
                 return ListView.builder(
                   itemBuilder: (context, index) {
                     return MemberJoinRequestTile(
-                        name: snapshot.data![index].user.id);
+                        joinGroupRequest: snapshot.data![index]);
                   },
                   itemCount: snapshot.data!.length,
                 );
@@ -61,7 +61,7 @@ class _MemberListState extends State<MemberList> {
             if (snapshot.hasData) {
               return ListView.builder(
                 itemBuilder: (context, index) {
-                  return MemberTile(name: snapshot.data![index].user.id);
+                  return MemberTile(member: snapshot.data![index]);
                 },
                 itemCount: snapshot.data!.length,
               );
@@ -97,8 +97,8 @@ class _MemberListState extends State<MemberList> {
 }
 
 class MemberJoinRequestTile extends StatelessWidget {
-  const MemberJoinRequestTile({super.key, required this.name});
-  final String name;
+  const MemberJoinRequestTile({super.key, required this.joinGroupRequest});
+  final JoinGroupRequest joinGroupRequest;
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +109,7 @@ class MemberJoinRequestTile extends StatelessWidget {
           backgroundImage: NetworkImage(
               "https://cdn.sforum.vn/sforum/wp-content/uploads/2023/06/tai-hinh-nen-dep-nhat-the-gioi-57.jpg"),
         ),
-        title: Text(this.name),
+        title: Text(this.joinGroupRequest.user.id),
         trailing: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           mainAxisSize: MainAxisSize.min,
@@ -124,8 +124,8 @@ class MemberJoinRequestTile extends StatelessWidget {
 }
 
 class MemberTile extends StatelessWidget {
-  const MemberTile({super.key, required this.name});
-  final String name;
+  const MemberTile({super.key, required this.member});
+  final Member member;
 
   @override
   Widget build(BuildContext context) {
@@ -136,7 +136,7 @@ class MemberTile extends StatelessWidget {
           backgroundImage: NetworkImage(
               "https://cdn.sforum.vn/sforum/wp-content/uploads/2023/06/tai-hinh-nen-dep-nhat-the-gioi-57.jpg"),
         ),
-        title: Text(name),
+        title: Text(member.user.id),
         trailing: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           mainAxisSize: MainAxisSize.min,
