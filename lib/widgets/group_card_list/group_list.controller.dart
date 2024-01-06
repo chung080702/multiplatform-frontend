@@ -19,7 +19,7 @@ class GroupListController extends GetxController {
         'Authorization': token,
       };
       var url = Uri.parse(
-          ApiEndPoints.baseURL + ApiEndPoints.groupEndPoints.getAll + "1");
+          ApiEndPoints.baseURL + ApiEndPoints.groupEndPoints.getAll(1));
       var response = await http.get(url, headers: headers);
       if (response.statusCode == 200) {
         var data = await json.decode(utf8.decode(response.bodyBytes));
