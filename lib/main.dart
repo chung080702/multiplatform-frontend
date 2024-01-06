@@ -20,8 +20,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
       ),
-      // home: LoginPage(),
-      home: AddEvent(),
+      home: LoginPage(),
+      // home: AddEvent(),
       onGenerateRoute: Routes.onGeneralRoute,
     );
   }
