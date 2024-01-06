@@ -52,8 +52,8 @@ class _FileEndPoints {
 }
 
 class _EventEndPoints {
-  String getAll(int pageNumber) {
-    return 'event/page/$pageNumber/search';
+  String getAll(int pageNumber, String? filter) {
+    return 'event/page/$pageNumber/search/${filter ?? ""}';
   }
 }
 

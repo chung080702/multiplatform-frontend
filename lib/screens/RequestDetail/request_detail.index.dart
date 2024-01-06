@@ -15,11 +15,28 @@ class RequestDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Yêu cầu trợ giúp'),
+        title: const Text('Yêu cầu trợ giúp'),
         centerTitle: true,
         actions: [
           Padding(
-            padding: EdgeInsets.only(right: 10),
+            padding: const EdgeInsets.only(right: 10),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.green,
+                borderRadius: BorderRadius.circular(3),
+              ),
+              padding:
+                  const EdgeInsets.only(right: 8, left: 8, top: 3, bottom: 3),
+              child: const Text(
+                "Help",
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 10),
             child: Container(
               decoration: BoxDecoration(
                 color: request.status == 'Pending'
@@ -29,15 +46,16 @@ class RequestDetail extends StatelessWidget {
                         : Colors.red,
                 borderRadius: BorderRadius.circular(3),
               ),
-              padding: EdgeInsets.only(right: 8, left: 8, top: 3, bottom: 3),
+              padding:
+                  const EdgeInsets.only(right: 8, left: 8, top: 3, bottom: 3),
               child: Text(
                 request.status,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white,
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
       body: Padding(
@@ -95,10 +113,9 @@ class RequestDetail extends StatelessWidget {
                     children: [
                       Text(
                         'Email: ',
-                          style: TextStyle(fontSize: 18),
+                        style: TextStyle(fontSize: 18),
                       ),
-                      Text(request.email ,
-                          style: TextStyle(fontSize: 18)),
+                      Text(request.email, style: TextStyle(fontSize: 18)),
                     ],
                   )
                 ],
