@@ -190,7 +190,7 @@ class _MemberTile extends State<MemberTile> {
                   IconButton(
                       onPressed: () async {
                         await groupController.fetchDeleteMember(
-                            widget.member.groupId, widget.member.id);
+                            widget.member.groupId, widget.member.user.id);
                         setState(() {
                           visiable = false;
                         });
