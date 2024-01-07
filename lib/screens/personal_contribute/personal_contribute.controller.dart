@@ -66,7 +66,7 @@ class PersonalContributeController {
     try {
       var url = Uri.parse(ApiEndPoints.baseURL +
           ApiEndPoints.requestEndPoints
-              .acceptPersonalContribute(personalContributeId));
+              .rejectPersonalContribute(personalContributeId));
       final SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
       String? token = sharedPreferences.getString("token");
