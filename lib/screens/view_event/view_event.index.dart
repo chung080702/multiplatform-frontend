@@ -157,13 +157,7 @@ class _ViewEventState extends State<ViewEvent> {
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       return BriefEvent(
-                        hrefs: events[index].imageIds,
-                        name: events[index].name,
-                        desc: events[index].description,
-                        startTime: events[index].start,
-                        endTime: events[index].end,
-                        address: events[index].address,
-                        content: events[index].content,
+                        event: events[index],
                       );
                     },
                   ),

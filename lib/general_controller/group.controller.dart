@@ -28,7 +28,9 @@ class GroupController extends GetxController {
       var response = await http.get(url, headers: headers);
       if (response.statusCode == 200) {
         var data = await json.decode(utf8.decode(response.bodyBytes));
-        return Group.fromJson(data['group']);
+        var group = Group.fromJson(data['group']);
+        group.events = await fetchGetAllEventOfGroupAPI(group.id, 1);
+        return group;
       } else {
         return Future.value(null);
       }
