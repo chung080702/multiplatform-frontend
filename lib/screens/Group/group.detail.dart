@@ -13,9 +13,9 @@ class GroupDetail extends StatefulWidget {
 }
 
 class _GroupDetail extends State<GroupDetail> {
+  String type = "joined"; // joined || notJoined || pending
   bool isLoading = false;
   final groupController = Get.put(GroupController());
-  Widget contentRequestButton = Text("Tham gia nhóm");
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -23,6 +23,14 @@ class _GroupDetail extends State<GroupDetail> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           Group group = snapshot.data!;
+          if (group.membership.status == 'Accepted') {
+            type = 'joined';
+          } else if (group.membership.status == 'None' ||
+              group.membership.status == 'Rejected') {
+            type = 'notJoined';
+          } else if (group.membership.status == 'Pending') {
+            type = 'pending';
+          }
           return Scaffold(
             appBar: AppBar(
               actions: group.membership.status == 'Accepted'
@@ -137,36 +145,42 @@ class _GroupDetail extends State<GroupDetail> {
                       Container(height: 8),
                       Text(group.description),
                       Container(height: 8),
-                      if (group.membership.status == 'Rejected' ||
-                          group.membership.status == 'None')
+                      if (type != 'joined')
                         FilledButton(
                           onPressed: () async {
                             setState(() {
                               isLoading = true;
-                              contentRequestButton =
-                                  CircularProgressIndicator();
                             });
+                            if (type == 'notJoined') {
+                              bool isRequested = await groupController
+                                  .fetchJoinGroupAPI(widget.groupId);
+                              if (isRequested) {
+                                setState(() {
+                                  type = 'pending';
+                                });
+                              } else {
+                                setState(() {
+                                  type = 'notJoined';
+                                });
+                              }
+                            } else if (type == 'pending') {
+                              setState(() {
+                                type = 'notJoined';
+                              });
+                            }
 
-                            bool isRequested = await groupController
-                                .fetchJoinGroupAPI(widget.groupId);
                             setState(() {
                               isLoading = false;
-                              contentRequestButton = Text("Hủy yêu cầu");
                             });
                           },
                           child: SizedBox(
                             width: double.infinity,
-                            child: Center(child: contentRequestButton),
-                          ),
-                        ),
-                      if (group.membership.status == 'Pending')
-                        FilledButton(
-                          onPressed: () {},
-                          child: SizedBox(
-                            width: double.infinity,
                             child: Center(
-                              child: Text('Hủy yêu cầu'),
-                            ),
+                                child: isLoading
+                                    ? CircularProgressIndicator()
+                                    : type == 'notJoined'
+                                        ? Text("Tham gia nhóm")
+                                        : Text("Hủy yêu cầu")),
                           ),
                         ),
                     ],
