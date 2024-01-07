@@ -35,6 +35,7 @@ class _CreateGroupState extends State<CreateGroup> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Tạo nhóm"),
+        centerTitle: true,
       ),
       body: Container(
         constraints:

@@ -28,7 +28,8 @@ class GroupListController extends GetxController {
         List<dynamic> jsonGroups = data['groups'];
         List<Group> groups = await Future.wait(jsonGroups.map((json) async {
           var group = Group.fromJson(json);
-          group.events = await groupController.fetchGetAllEventOfGroupAPI(group.id, 1);
+          group.events =
+              await groupController.fetchGetAllEventOfGroupAPI(group.id, 1);
           return group;
         }).toList());
         return groups;
@@ -36,11 +37,10 @@ class GroupListController extends GetxController {
         return [];
       }
     } catch (e) {
+      print(e.toString());
       return [];
     }
   }
-
-
 
   Future<List<Group>> fetchGetAllOfUserApi() async {
     try {
@@ -53,7 +53,66 @@ class GroupListController extends GetxController {
         List<dynamic> jsonGroups = data['groups'];
         List<Group> groups = await Future.wait(jsonGroups.map((json) async {
           var group = Group.fromJson(json);
-          group.events = await groupController.fetchGetAllEventOfGroupAPI(group.id, 1);
+          group.events =
+              await groupController.fetchGetAllEventOfGroupAPI(group.id, 1);
+          return group;
+        }).toList());
+        return groups;
+      } else {
+        return [];
+      }
+    } catch (e) {
+      return [];
+    }
+  }
+
+  Future<List<Group>> fetchGetAllGroupPendingApi() async {
+    try {
+      final SharedPreferences? prefs = await _prefs;
+      String token = await prefs!.getString('token')!;
+      var headers = {
+        'Authorization': token,
+      };
+
+      var url = Uri.parse(
+          ApiEndPoints.baseURL + ApiEndPoints.groupEndPoints.getAllPending(1));
+      var response = await http.get(url, headers: headers);
+      if (response.statusCode == 200) {
+        var data = await json.decode(utf8.decode(response.bodyBytes));
+        List<dynamic> jsonGroups = data['groups'];
+        List<Group> groups = await Future.wait(jsonGroups.map((json) async {
+          var group = Group.fromJson(json);
+          group.events =
+              await groupController.fetchGetAllEventOfGroupAPI(group.id, 1);
+          return group;
+        }).toList());
+        return groups;
+      } else {
+        return [];
+      }
+    } catch (e) {
+      return [];
+    }
+  }
+
+  Future<List<Group>> fetchGetAllGroupNoneApi() async {
+    try {
+      final SharedPreferences? prefs = await _prefs;
+      String token = await prefs!.getString('token')!;
+      var headers = {
+        'Authorization': token,
+      };
+
+      var url = Uri.parse(
+          ApiEndPoints.baseURL + ApiEndPoints.groupEndPoints.getAllNone(1));
+      var response = await http.get(url, headers: headers);
+      if (response.statusCode == 200) {
+        var data = await json.decode(utf8.decode(response.bodyBytes));
+        List<dynamic> jsonGroups = data['groups'];
+        List<Group> groups = await Future.wait(jsonGroups.map((json) async {
+          var group = Group.fromJson(json);
+          group.events =
+              await groupController.fetchGetAllEventOfGroupAPI(group.id, 1);
           return group;
         }).toList());
         return groups;

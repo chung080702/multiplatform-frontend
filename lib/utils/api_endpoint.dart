@@ -13,6 +13,10 @@ class _AuthEndPoints {
 }
 
 class _GroupEndPoints {
+  String getById(String groupId) {
+    return 'group/$groupId';
+  }
+
   String getAll(int pageNumber) {
     return 'group/page/$pageNumber/search';
   }
@@ -23,11 +27,19 @@ class _GroupEndPoints {
     return 'group/user/$accountID/page/$pageNumber/search';
   }
 
+  String getAllPending(int pageNumber) {
+    return 'group/page/$pageNumber/pending/search';
+  }
+
+  String getAllNone(int pageNumber) {
+    return 'group/page/$pageNumber/none/search';
+  }
+
   String createEvent(String groupId) {
     return "group/$groupId/event";
   }
 
-  String joinGroup(int groupID) {
+  String joinGroup(String groupID) {
     return 'group/$groupID/join';
   }
 
@@ -41,6 +53,10 @@ class _GroupEndPoints {
 
   String rejectJoinGroupRequest(String groupID, String joinRequestID) {
     return 'group/$groupID/join/$joinRequestID';
+  }
+
+  String deleteMember(String groupId, String memberId) {
+    return 'group/$groupId/member/$memberId';
   }
 
   String getEventsOfGroup(String groupID, int page) {
