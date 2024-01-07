@@ -1,4 +1,5 @@
 import 'package:multiplatform_app/models/event.model.dart';
+import 'package:multiplatform_app/models/membership.model.dart';
 
 class Group {
   final String id;
@@ -6,6 +7,7 @@ class Group {
   final String description;
   final String imageId;
   final int memberNumber;
+  final List<Membership> membership;
   List<Event> events = [];
 
   Group(
@@ -13,7 +15,8 @@ class Group {
       required this.name,
       required this.description,
       required this.imageId,
-      required this.memberNumber});
+      required this.memberNumber,
+      required this.membership});
 
   factory Group.fromJson(Map<String, dynamic> json) {
     return switch (json) {
@@ -22,14 +25,16 @@ class Group {
         'name': String name,
         'description': String description,
         'imageId': String imageId,
-        'memberNumber': int memberNumber
+        'memberNumber': int memberNumber,
+        'membership': List<Membership> membership
       } =>
         Group(
             id: id,
             name: name,
             description: description,
             imageId: imageId,
-            memberNumber: memberNumber),
+            memberNumber: memberNumber,
+            membership: membership),
       _ => throw const FormatException('Failed to load Group.')
     };
   }
