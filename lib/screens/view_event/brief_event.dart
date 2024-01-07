@@ -5,39 +5,26 @@ import 'package:multiplatform_app/general/constants/app_color.dart';
 import 'package:multiplatform_app/general/constants/app_icon.dart';
 import 'package:multiplatform_app/general/constants/app_text_style.dart';
 import 'package:multiplatform_app/general/routes/routes.dart';
+import 'package:multiplatform_app/models/event.model.dart';
 import 'package:multiplatform_app/utils/api_endpoint.dart';
 
 class BriefEvent extends StatelessWidget {
-  const BriefEvent(
-      {super.key,
-      required this.hrefs,
-      required this.name,
-      required this.desc,
-      required this.startTime,
-      required this.endTime,
-      required this.address,
-      required this.content});
+  const BriefEvent({super.key, required this.event});
 
-  final List<String> hrefs;
-  final String name;
-  final String desc;
-  final String startTime;
-  final String endTime;
-  final String address;
-  final String content;
+  final Event event;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
         Navigator.of(context).pushNamed(Routes.eventDetail, arguments: {
-          "hrefs": hrefs,
-          "name": name,
-          "desc": desc,
-          "startTime": startTime,
-          "endTime": endTime,
-          "address": address,
-          "content": content
+          "hrefs": event.imageIds,
+          "name": event.name,
+          "desc": event.description,
+          "startTime": event.start,
+          "endTime": event.end,
+          "address": event.address,
+          "content": event.content
         });
       },
       child: Padding(
@@ -55,7 +42,7 @@ class BriefEvent extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: const BorderRadius.all(Radius.circular(4)),
                     child: Image.network(
-                      "${ApiEndPoints.baseURL}/file/${hrefs[0]}",
+                      "${ApiEndPoints.baseURL}/file/${event.imageIds[0]}",
                       height: double.infinity,
                       width: double.infinity,
                       fit: BoxFit.cover,
@@ -71,28 +58,28 @@ class BriefEvent extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          name,
+                          event.name,
                           style: AppTextStyle.textStyle_18_700_28,
                         ),
                         Text(
-                          desc,
+                          event.description,
                           style: AppTextStyle.textStyle_12_400_18,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
                         Text(
-                          "From : ${DateFormat.Hms('vi').format(DateTime.parse(startTime))}-${DateFormat.yMd('vi').format(DateTime.parse(startTime))}",
+                          "From : ${DateFormat.Hms('vi').format(DateTime.parse(event.start))}-${DateFormat.yMd('vi').format(DateTime.parse(event.start))}",
                           style: AppTextStyle.textStyle_12_600_18,
                         ),
                         Text(
-                          "To : ${DateFormat.Hms('vi').format(DateTime.parse(endTime))}-${DateFormat.yMd('vi').format(DateTime.parse(endTime))}",
+                          "To : ${DateFormat.Hms('vi').format(DateTime.parse(event.end))}-${DateFormat.yMd('vi').format(DateTime.parse(event.end))}",
                           style: AppTextStyle.textStyle_12_600_18,
                         ),
                         Row(
                           children: [
                             SvgPicture.asset(AppIcon.address),
                             Text(
-                              address,
+                              event.address,
                               style: AppTextStyle.textStyle_12_400_18,
                               overflow: TextOverflow.visible,
                               maxLines: 1,
