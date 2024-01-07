@@ -1,11 +1,14 @@
+import 'package:multiplatform_app/models/event.model.dart';
+
 class Group {
   final String id;
   final String name;
   final String description;
   final String imageId;
   final int memberNumber;
+  List<Event> events = [];
 
-  const Group(
+  Group(
       {required this.id,
       required this.name,
       required this.description,

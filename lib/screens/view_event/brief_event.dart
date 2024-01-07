@@ -43,7 +43,7 @@ class BriefEvent extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 6),
         child: Container(
-          height: MediaQuery.sizeOf(context).height / 6,
+          height: MediaQuery.sizeOf(context).height / 5 + 14,
           alignment: Alignment.center,
           decoration: BoxDecoration(
               color: AppColor.greySoft, borderRadius: BorderRadius.circular(8)),

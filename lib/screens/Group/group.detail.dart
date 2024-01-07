@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:multiplatform_app/models/group.model.dart';
 import 'package:multiplatform_app/screens/Group/group.member-list.dart';
 import 'package:multiplatform_app/screens/add_event/add_event.index.dart';
+import 'package:multiplatform_app/screens/view_event/brief_event.dart';
 
 class GroupDetail extends StatelessWidget {
   const GroupDetail({super.key, required this.group, this.haveJoined = false});
@@ -94,32 +95,44 @@ class GroupDetail extends StatelessWidget {
                 ])
           ],
         ),
-        body: Column(
-          children: <Widget>[
-            AspectRatio(
-              aspectRatio: 16 / 9,
-              child: Image.network(
-                'https://multiplatform-backend.vercel.app/file/${group.imageId}',
-                width: double.infinity,
-                fit: BoxFit.fill,
+        body: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              AspectRatio(
+                aspectRatio: 16 / 9,
+                child: Image.network(
+                  'https://multiplatform-backend.vercel.app/file/${group.imageId}',
+                  width: double.infinity,
+                  fit: BoxFit.fill,
+                ),
               ),
-            ),
-            Container(
-              padding: EdgeInsets.fromLTRB(8, 8, 8, 0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    group.name,
-                    style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-                  ),
-                  Text("${group.memberNumber} thành viên"),
-                  Container(height: 8),
-                  Text(group.description),
-                ],
+              Container(
+                padding: EdgeInsets.fromLTRB(8, 8, 8, 0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      group.name,
+                      style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+                    ),
+                    Text("${group.memberNumber} thành viên"),
+                    Container(height: 8),
+                    Text(group.description),
+                  ],
+                ),
               ),
-            ),
-          ],
+              Column(
+                children: group.events.map((event) => BriefEvent(
+                    hrefs: event.imageIds,
+                    name: event.name,
+                    desc: event.description,
+                    startTime: event.start,
+                    endTime: event.end,
+                    address: event.address,
+                    content: event.content)).toList(),
+              )
+            ],
+          ),
         ),
       );
     }
