@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:intl/intl.dart';
 import 'package:multiplatform_app/general/constants/app_color.dart';
 import 'package:multiplatform_app/general/constants/app_icon.dart';
 import 'package:multiplatform_app/general/constants/app_text_style.dart';
@@ -42,7 +43,7 @@ class BriefEvent extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 6),
         child: Container(
-          height: MediaQuery.sizeOf(context).height / 6,
+          height: MediaQuery.sizeOf(context).height / 5 + 14,
           alignment: Alignment.center,
           decoration: BoxDecoration(
               color: AppColor.greySoft, borderRadius: BorderRadius.circular(8)),
@@ -80,11 +81,11 @@ class BriefEvent extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                         ),
                         Text(
-                          "From : ${DateTime.parse(startTime).toLocal()}",
+                          "From : ${DateFormat.Hms('vi').format(DateTime.parse(startTime))}-${DateFormat.yMd('vi').format(DateTime.parse(startTime))}",
                           style: AppTextStyle.textStyle_12_600_18,
                         ),
                         Text(
-                          "To : ${DateTime.parse(endTime).toLocal()}",
+                          "To : ${DateFormat.Hms('vi').format(DateTime.parse(endTime))}-${DateFormat.yMd('vi').format(DateTime.parse(endTime))}",
                           style: AppTextStyle.textStyle_12_600_18,
                         ),
                         Row(

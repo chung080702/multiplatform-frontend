@@ -49,12 +49,14 @@ class _ViewEventState extends State<ViewEvent> {
   }
 
   void backPage() {
-    page++;
+    page--;
   }
 
   void init() {
     startLoading();
-    viewEventController.getEvents(page).then((addedEvents) {
+    viewEventController
+        .getEvents(page, filterEditingController.text)
+        .then((addedEvents) {
       addEvents(addedEvents);
       endLoading();
     });
@@ -70,7 +72,9 @@ class _ViewEventState extends State<ViewEvent> {
           scrollController.position.maxScrollExtent) {
         startLoading();
         nextPage();
-        viewEventController.getEvents(page).then((addedEvents) {
+        viewEventController
+            .getEvents(page, filterEditingController.text)
+            .then((addedEvents) {
           if (addedEvents.isEmpty) {
             backPage();
           } else {
@@ -86,13 +90,6 @@ class _ViewEventState extends State<ViewEvent> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: InkWell(
-          onTap: () {},
-          child: const Icon(
-            Icons.arrow_back,
-          ),
-        ),
-        leadingWidth: 24,
         title: Row(
           children: [
             Expanded(
@@ -116,6 +113,17 @@ class _ViewEventState extends State<ViewEvent> {
               width: 20,
             ),
             InkWell(
+              onTap: () {
+                startLoading();
+                viewEventController
+                    .getEvents(page, filterEditingController.text)
+                    .then((newEvents) {
+                  setState(() {
+                    events = newEvents;
+                  });
+                  endLoading();
+                });
+              },
               child: Container(
                 decoration: const BoxDecoration(
                     color: AppColor.buttonGreen,

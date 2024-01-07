@@ -14,6 +14,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilePage extends StatelessWidget {
   final accountController = Get.find<AccountController>();
+
   @override
   Widget build(BuildContext context) {
     void onSelected(BuildContext context, int item) async {
@@ -26,22 +27,6 @@ class ProfilePage extends StatelessWidget {
     }
 
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-          onTap: (index) {
-            if (index == 0) {
-              Get.offAll(HomePage());
-            }else if(index == 1){
-              Get.offAll(Groups());
-            }
-          },
-          currentIndex: 2,
-          selectedItemColor: backgroundGradientFirst,
-          items: [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.group), label: 'Group'),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-          ]),
       appBar: AppBar(
         actions: [
           PopupMenuButton<int>(
@@ -87,7 +72,8 @@ class ProfilePage extends StatelessWidget {
                     ElevatedButton(
                         onPressed: () {
                           Get.to(RequestCreate());
-                        }, child: Text('Thêm yêu cầu trợ giúp')),
+                        },
+                        child: Text('Thêm yêu cầu trợ giúp')),
                     SizedBox(
                       height: 30,
                     ),
@@ -99,9 +85,11 @@ class ProfilePage extends StatelessWidget {
                             fontSize: 16, fontWeight: FontWeight.w600),
                       ),
                     ),
-                    GroupCardList(info: {
-                      'type': 'ofUser',
-                    },),
+                    GroupCardList(
+                      info: {
+                        'type': 'ofUser',
+                      },
+                    ),
                     SizedBox(
                       height: 20,
                     ),
@@ -113,9 +101,11 @@ class ProfilePage extends StatelessWidget {
                             fontSize: 16, fontWeight: FontWeight.w600),
                       ),
                     ),
-                    RequestCardList(info: {
-                      'type': 'ofUser',
-                    },),
+                    RequestCardList(
+                      info: {
+                        'type': 'ofUser',
+                      },
+                    ),
                     SizedBox(
                       height: 20,
                     ),

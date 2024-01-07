@@ -42,7 +42,7 @@ class InputDefault extends StatelessWidget {
                   color: AppColor.grey,
                   decoration: TextDecoration.none,
                   decorationThickness: 0)
-              .merge(AppTextStyle.textStyle_12_600_18),
+              .merge(AppTextStyle.textStyle_14_400_20),
           validator: validator,
           decoration: InputDecoration(
             focusColor: AppColor.shade60Blue,
