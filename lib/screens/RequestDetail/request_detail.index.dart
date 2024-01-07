@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:multiplatform_app/general/constants/app_color.dart';
 import 'package:multiplatform_app/general/constants/app_text_style.dart';
 import 'package:multiplatform_app/models/request.model.dart';
-import 'package:multiplatform_app/screens/Home/home.index.dart';
+import 'package:multiplatform_app/screens/direct_support/direct_support.index.dart';
+import 'package:multiplatform_app/screens/personal_contribute/personal_contribute.index.dart';
 import 'package:multiplatform_app/utils/api_endpoint.dart';
-import 'package:multiplatform_app/utils/color.dart';
 
 class RequestDetail extends StatelessWidget {
-  Request request;
+  RequestDetail({super.key, required this.request, this.isOfUser});
 
-  RequestDetail({required this.request});
+  bool? isOfUser;
+  Request request;
 
   @override
   Widget build(BuildContext context) {
@@ -18,23 +20,37 @@ class RequestDetail extends StatelessWidget {
         title: const Text('Yêu cầu trợ giúp'),
         centerTitle: true,
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 10),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.green,
-                borderRadius: BorderRadius.circular(3),
-              ),
-              padding:
-                  const EdgeInsets.only(right: 8, left: 8, top: 3, bottom: 3),
-              child: const Text(
-                "Help",
-                style: TextStyle(
-                  color: Colors.white,
+          if (isOfUser != null && !isOfUser!)
+            IgnorePointer(
+              ignoring: request.status == 'Pending',
+              child: Opacity(
+                opacity: request.status == 'Pending' ? 0.2 : 1,
+                child: InkWell(
+                  onTap: () {
+                    Get.to(DirectSupport(
+                      request: request,
+                    ));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: BorderRadius.circular(3),
+                      ),
+                      padding: const EdgeInsets.only(
+                          right: 8, left: 8, top: 3, bottom: 3),
+                      child: const Text(
+                        "Support",
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),
-          ),
           Padding(
             padding: const EdgeInsets.only(right: 10),
             child: Container(
@@ -56,6 +72,7 @@ class RequestDetail extends StatelessWidget {
               ),
             ),
           ),
+          if (isOfUser != null && isOfUser!) show(context)
         ],
       ),
       body: Padding(
@@ -141,5 +158,46 @@ class RequestDetail extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  show(BuildContext context) {
+    return MenuAnchor(
+        builder:
+            (BuildContext context, MenuController controller, Widget? child) {
+          return IconButton(
+              onPressed: () {
+                if (controller.isOpen) {
+                  controller.close();
+                } else {
+                  controller.open();
+                }
+              },
+              icon: const Icon(
+                Icons.more_vert_rounded,
+                size: 20,
+              ));
+        },
+        menuChildren: <Widget>[
+          MenuItemButton(
+            child: Row(
+              children: [
+                const Icon(Icons.group_rounded),
+                Container(
+                  width: 4,
+                ),
+                Text(
+                  "Những người trợ giúp",
+                  style: AppTextStyle.textStyle_14_400_20
+                      .merge(const TextStyle(color: AppColor.dark)),
+                )
+              ],
+            ),
+            onPressed: () {
+              Get.to(PersonalContribute(
+                request: request,
+              ));
+            },
+          ),
+        ]);
   }
 }

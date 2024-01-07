@@ -13,6 +13,10 @@ class _AuthEndPoints {
 }
 
 class _GroupEndPoints {
+  String getById(String groupId) {
+    return 'group/$groupId';
+  }
+
   String getAll(int pageNumber) {
     return 'group/page/$pageNumber/search';
   }
@@ -21,6 +25,14 @@ class _GroupEndPoints {
 
   String getAllOfUser(String accountID, int pageNumber) {
     return 'group/user/$accountID/page/$pageNumber/search';
+  }
+
+  String getAllPending(int pageNumber) {
+    return 'group/page/$pageNumber/pending/search';
+  }
+
+  String getAllNone(int pageNumber) {
+    return 'group/page/$pageNumber/none/search';
   }
 
   String createEvent(String groupId) {
@@ -41,6 +53,10 @@ class _GroupEndPoints {
 
   String rejectJoinGroupRequest(String groupID, String joinRequestID) {
     return 'group/$groupID/join/$joinRequestID';
+  }
+
+  String deleteMember(String groupId, String memberId) {
+    return 'group/$groupId/member/$memberId';
   }
 
   String getEventsOfGroup(String groupID, int page) {
@@ -71,5 +87,21 @@ class _RequestEndPoints {
 
   String getAllOfUser(String accountID, int pageNumber) {
     return 'supportRequest/account/$accountID/page/$pageNumber/search';
+  }
+
+  String createPersonalContribute(String supportRequestId) {
+    return "supportRequest/$supportRequestId/contribute";
+  }
+
+  String getPersonalsContribute(String supportRequestId, int page) {
+    return "supportRequest/$supportRequestId/contribute/page/$page";
+  }
+
+  String acceptPersonalContribute(String personalContributeId) {
+    return "supportRequest/contribute/$personalContributeId";
+  }
+
+  String rejectPersonalContribute(String personalContributeId) {
+    return "supportRequest/contribute/$personalContributeId";
   }
 }

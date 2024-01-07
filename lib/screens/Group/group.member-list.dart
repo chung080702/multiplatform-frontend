@@ -98,55 +98,113 @@ class _MemberListState extends State<MemberList> {
   }
 }
 
-class MemberJoinRequestTile extends StatelessWidget {
+class MemberJoinRequestTile extends StatefulWidget {
   const MemberJoinRequestTile({super.key, required this.joinGroupRequest});
   final JoinGroupRequest joinGroupRequest;
 
   @override
+  State<StatefulWidget> createState() => _MemberJoinRequestTile();
+}
+
+class _MemberJoinRequestTile extends State<MemberJoinRequestTile> {
+  final groupController = Get.put(GroupController());
+  bool visiable = true;
+  @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return Card(
-      child: ListTile(
-        leading: CircleAvatar(
-          backgroundImage: NetworkImage(
-              "https://cdn.sforum.vn/sforum/wp-content/uploads/2023/06/tai-hinh-nen-dep-nhat-the-gioi-57.jpg"),
-        ),
-        title: Text(this.joinGroupRequest.user.id),
-        trailing: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            IconButton(onPressed: () {}, icon: Icon(Icons.done_rounded)),
-            IconButton(onPressed: () {}, icon: Icon(Icons.cancel_rounded)),
-          ],
-        ),
-      ),
-    );
+    return visiable
+        ? Card(
+            child: ListTile(
+              leading: CircleAvatar(
+                backgroundImage: NetworkImage(
+                    "https://cdn.sforum.vn/sforum/wp-content/uploads/2023/06/tai-hinh-nen-dep-nhat-the-gioi-57.jpg"),
+              ),
+              title: Text(widget.joinGroupRequest.user.id),
+              trailing: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(
+                      onPressed: () async {
+                        await groupController.fetchAcceptJoinGroupRequestAPI(
+                            widget.joinGroupRequest.groupId,
+                            widget.joinGroupRequest.id);
+                        setState(() {
+                          visiable = false;
+                        });
+                        Get.snackbar(
+                          'Thành công',
+                          'Đã chấp nhận yêu cầu tham gia',
+                          snackPosition: SnackPosition.BOTTOM,
+                        );
+                      },
+                      icon: Icon(Icons.done_rounded)),
+                  IconButton(
+                      onPressed: () async {
+                        await groupController.fetchRejectJoinGroupRequestAPI(
+                            widget.joinGroupRequest.groupId,
+                            widget.joinGroupRequest.id);
+                        setState(() {
+                          visiable = false;
+                        });
+                        Get.snackbar(
+                          'Thành công',
+                          'Đã từ chối yêu cầu tham gia',
+                          snackPosition: SnackPosition.BOTTOM,
+                        );
+                      },
+                      icon: Icon(Icons.cancel_rounded)),
+                ],
+              ),
+            ),
+          )
+        : Container();
   }
 }
 
-class MemberTile extends StatelessWidget {
+class MemberTile extends StatefulWidget {
   const MemberTile({super.key, required this.member});
   final Member member;
 
   @override
+  State<StatefulWidget> createState() => _MemberTile();
+}
+
+class _MemberTile extends State<MemberTile> {
+  final groupController = Get.put(GroupController());
+  bool visiable = true;
+  @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Card(
-      child: ListTile(
-        leading: CircleAvatar(
-          backgroundImage: NetworkImage(
-              "https://cdn.sforum.vn/sforum/wp-content/uploads/2023/06/tai-hinh-nen-dep-nhat-the-gioi-57.jpg"),
-        ),
-        title: Text(member.user.id),
-        trailing: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            IconButton(onPressed: () {}, icon: Icon(Icons.delete_rounded)),
-          ],
-        ),
-      ),
-    );
+    return visiable
+        ? Card(
+            child: ListTile(
+              leading: CircleAvatar(
+                backgroundImage: NetworkImage(
+                    "https://cdn.sforum.vn/sforum/wp-content/uploads/2023/06/tai-hinh-nen-dep-nhat-the-gioi-57.jpg"),
+              ),
+              title: Text(widget.member.user.id),
+              trailing: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(
+                      onPressed: () async {
+                        await groupController.fetchDeleteMember(
+                            widget.member.groupId, widget.member.id);
+                        setState(() {
+                          visiable = false;
+                        });
+                        Get.snackbar(
+                          'Thành công',
+                          'Đã xóa thành viên',
+                          snackPosition: SnackPosition.BOTTOM,
+                        );
+                      },
+                      icon: Icon(Icons.delete_rounded)),
+                ],
+              ),
+            ),
+          )
+        : Container();
   }
 }

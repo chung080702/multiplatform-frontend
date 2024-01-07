@@ -48,6 +48,12 @@ class _AddEventState extends State<AddEvent> {
     super.initState();
   }
 
+  void removePicker(File image) {
+    setState(() {
+      images.removeWhere((item) => item == image);
+    });
+  }
+
   Future<void> pickImage() async {
     final picker = ImagePicker();
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
@@ -346,17 +352,33 @@ class _AddEventState extends State<AddEvent> {
                               scrollDirection: Axis.horizontal,
                               child: Row(
                                 children: [
-                                  ...images.map((image) => Container(
-                                        margin: const EdgeInsets.symmetric(
-                                            horizontal: 8),
-                                        height: double.infinity,
-                                        width: 150,
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                          child: Image.file(image,
-                                              fit: BoxFit.cover),
-                                        ),
+                                  ...images.map((image) => Stack(
+                                        children: [
+                                          Container(
+                                            margin: const EdgeInsets.symmetric(
+                                                horizontal: 8),
+                                            height: double.infinity,
+                                            width: 150,
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              child: Image.file(image,
+                                                  fit: BoxFit.cover),
+                                            ),
+                                          ),
+                                          Positioned(
+                                              right: 0,
+                                              top: -10,
+                                              child: IconButton(
+                                                onPressed: () {
+                                                  removePicker(image);
+                                                },
+                                                icon: const Icon(
+                                                  Icons.delete_outlined,
+                                                  color: AppColor.red,
+                                                ),
+                                              ))
+                                        ],
                                       )),
                                   InkWell(
                                     onTap: () {

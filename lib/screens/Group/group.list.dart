@@ -66,7 +66,7 @@ class _GroupListState extends State<GroupList> {
   Future<List<Group>> fetchGroupList() async {
     if (widget.info['type'] == 'notJoined') {
       try {
-        var tmpGroupList = await groupListController.fetchGetAllGroupApi();
+        var tmpGroupList = await groupListController.fetchGetAllGroupNoneApi();
         return tmpGroupList;
       } catch (e) {
         return [];

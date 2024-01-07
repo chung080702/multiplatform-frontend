@@ -16,9 +16,8 @@ class GroupCardJoined extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => GroupDetailJoined(
-              type: "joined",
-              group: group,
+            builder: (context) => GroupDetail(
+              groupId: group.id,
             ),
           ),
         );
@@ -93,9 +92,8 @@ class _GroupCard extends State<GroupCardNotJoined> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => GroupDetailJoined(
-              type: widget.type,
-              group: widget.group,
+            builder: (context) => GroupDetail(
+              groupId: widget.group.id,
             ),
           ),
         );
@@ -137,6 +135,11 @@ class _GroupCard extends State<GroupCardNotJoined> {
                 ],
               ),
             ),
+            if (widget.type == "joined")
+              Container(
+                padding: EdgeInsets.fromLTRB(8, 0, 8, 4),
+                child: Text(widget.group.description),
+              ),
             if (widget.type == "notJoined")
               Container(
                 padding: EdgeInsets.fromLTRB(8, 0, 8, 4),
