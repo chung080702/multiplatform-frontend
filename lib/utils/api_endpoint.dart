@@ -16,6 +16,7 @@ class _GroupEndPoints {
   String getAll(int pageNumber) {
     return 'group/page/$pageNumber/search';
   }
+
   final String create = "group";
 
   String getAllOfUser(String accountID, int pageNumber) {
@@ -26,7 +27,7 @@ class _GroupEndPoints {
     return "group/$groupId/event";
   }
 
-  String joinGroup(int groupID) {
+  String joinGroup(String groupID) {
     return 'group/$groupID/join';
   }
 

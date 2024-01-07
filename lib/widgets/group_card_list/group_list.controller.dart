@@ -44,7 +44,32 @@ class GroupListController extends GetxController {
       if (response.statusCode == 200) {
         var data = await json.decode(utf8.decode(response.bodyBytes));
         List<dynamic> jsonGroups = data['groups'];
-        List<Group> groups = jsonGroups.map((item) => Group.fromJson(item)).toList();
+        List<Group> groups =
+            jsonGroups.map((item) => Group.fromJson(item)).toList();
+        return groups;
+      } else {
+        return [];
+      }
+    } catch (e) {
+      return [];
+    }
+  }
+
+  Future<List<Group>> fetchGetAllGroupPendingApi() async {
+    try {
+      final SharedPreferences? prefs = await _prefs;
+      String token = await prefs!.getString('token')!;
+      Map<String, String> headers = {
+        'Authorization': token,
+      };
+      var url = Uri.parse(
+          ApiEndPoints.baseURL + ApiEndPoints.groupEndPoints.getAll(1));
+      var response = await http.get(url, headers: headers);
+      if (response.statusCode == 200) {
+        var data = await json.decode(utf8.decode(response.bodyBytes));
+        List<dynamic> jsonGroups = data['groups'];
+        List<Group> groups =
+            jsonGroups.map((item) => Group.fromJson(item)).toList();
         return groups;
       } else {
         return [];

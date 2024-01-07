@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:multiplatform_app/screens/Group/group.list.dart';
+import 'package:multiplatform_app/screens/Group/group.index.dart';
 import 'package:multiplatform_app/screens/Profile/profile.index.dart';
 import 'package:multiplatform_app/screens/RequestView/request_view.index.dart';
 import 'package:multiplatform_app/screens/view_event/view_event.index.dart';
@@ -19,7 +19,7 @@ class _AppState extends State<App> {
   int _selectedIndex = 0;
   static List<Widget> _widgetOptions = <Widget>[
     HomePage(),
-    Groups(),
+    GroupPage(),
     ProfilePage()
   ];
   void _onItemTapped(int index) {

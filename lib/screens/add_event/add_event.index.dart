@@ -63,6 +63,7 @@ class _AddEventState extends State<AddEvent> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Thêm sự kiện"),
+        centerTitle: true,
         backgroundColor: AppColor.greySoft,
         systemOverlayStyle:
             const SystemUiOverlayStyle(statusBarBrightness: Brightness.light),

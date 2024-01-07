@@ -30,6 +30,7 @@ class _MemberListState extends State<MemberList> {
       return Scaffold(
           appBar: AppBar(
             title: Text("Yêu cầu tham gia"),
+            centerTitle: true,
           ),
           body: FutureBuilder<List<JoinGroupRequest>>(
             future: futureJoinGroupRequest,
@@ -54,6 +55,7 @@ class _MemberListState extends State<MemberList> {
     return Scaffold(
         appBar: AppBar(
           title: Text("Thành viên"),
+          centerTitle: true,
         ),
         body: FutureBuilder<List<Member>>(
           future: futureFetchAllMembers,
