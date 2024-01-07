@@ -60,6 +60,18 @@ class _EventEndPoints {
   String getAll(int pageNumber, String? filter) {
     return 'event/page/$pageNumber/search/${filter ?? ""}';
   }
+
+  String getAllPending(int pageNumber) {
+    return 'event/page/$pageNumber/pending/search/';
+  }
+
+  String acceptEvent(String eventID) {
+    return 'event/$eventID';
+  }
+
+  String rejectEvent(String eventID) {
+    return 'event/$eventID';
+  }
 }
 
 class _RequestEndPoints {
@@ -68,6 +80,19 @@ class _RequestEndPoints {
   String getAll(int pageNumber) {
     return 'supportRequest/page/$pageNumber/search';
   }
+
+  String getAllPending(int pageNumber) {
+    return 'supportRequest/page/$pageNumber/pending/search';
+  }
+
+  String acceptRequest(String requestID) {
+    return 'supportRequest/$requestID';
+  }
+
+  String rejectRequest(String requestID) {
+    return 'supportRequest/$requestID';
+  }
+
 
   String getAllOfUser(String accountID, int pageNumber) {
     return 'supportRequest/account/$accountID/page/$pageNumber/search';

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:multiplatform_app/general_controller/account.controller.dart';
 import 'package:multiplatform_app/models/user.model.dart';
+import 'package:multiplatform_app/screens/Admin/admin.index.dart';
 import 'package:multiplatform_app/screens/Home/home.index.dart';
 import 'package:multiplatform_app/screens/Profile/profile.index.dart';
 import 'package:multiplatform_app/utils/api_endpoint.dart';
@@ -35,14 +36,18 @@ class LoginController extends GetxController {
         await prefs?.setString("token", token);
         accountController.account.value =
             User.fromJson(responseData['account']);
-        usernameTextController.clear();
-        passwordTextController.clear();
         Get.snackbar(
           'Success',
           'Login successful!',
           snackPosition: SnackPosition.BOTTOM,
         );
-        Get.offAll(App());
+        if (usernameTextController.text == "admin" && passwordTextController.text == "admin") {
+          Get.offAll(AdminPage(index: 0,));
+        } else {
+          Get.offAll(App());
+        }
+        usernameTextController.clear();
+        passwordTextController.clear();
       } else {
         throw response.body ?? "Unknown Error Occured";
       }
