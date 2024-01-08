@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:multiplatform_app/general_controller/account.controller.dart';
 import 'package:multiplatform_app/models/event.model.dart';
 import 'package:multiplatform_app/models/group.model.dart';
+import 'package:multiplatform_app/models/group_contribute.model.dart';
 import 'package:multiplatform_app/models/join_group_request.model.dart';
 import 'package:multiplatform_app/models/member.model.dart';
 import 'package:multiplatform_app/utils/api_endpoint.dart';
@@ -195,6 +196,84 @@ class GroupController extends GetxController {
         List<Member> members =
             jsonMembers.map((json) => Member.fromJson(json)).toList();
         return members;
+      } else {
+        return [];
+      }
+    } catch (e) {
+      return [];
+    }
+  }
+
+  // dong gop su kien
+  Future<bool> fetchCreateContributeAPI(String eventID) async {
+    try {
+      final SharedPreferences? prefs = await _prefs;
+      String token = await prefs!.getString('token')!;
+      var headers = {
+        'Content-Type': 'application/json',
+        "Authorization": token
+      };
+      var url = Uri.parse(ApiEndPoints.baseURL +
+          ApiEndPoints.groupEndPoints.createContribute(eventID));
+      var response = await http.post(url, headers: headers);
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> fetchAcceptGroupContributeAPI(String contributeID) async {
+    try {
+      final SharedPreferences? prefs = await _prefs;
+      String token = await prefs!.getString('token')!;
+      var headers = {"Authorization": token};
+      var url = Uri.parse(ApiEndPoints.baseURL + ApiEndPoints.groupEndPoints.acceptContribute(contributeID));
+      var response = await http.post(url, headers: headers);
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> fetchRejectGroupContributeAPI(String contributeID) async {
+    try {
+      final SharedPreferences? prefs = await _prefs;
+      String token = await prefs!.getString('token')!;
+      var headers = {"Authorization": token};
+      var url = Uri.parse(ApiEndPoints.baseURL + ApiEndPoints.groupEndPoints.rejectContribute(contributeID));
+      var response = await http.delete(url, headers: headers);
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<List<GroupContribute>> fetchGetAllContributeAPI(String eventID) async {
+    try {
+      final SharedPreferences? prefs = await _prefs;
+      String token = await prefs!.getString('token')!;
+      var headers = {"Authorization": token};
+      var url = Uri.parse(ApiEndPoints.baseURL +
+          ApiEndPoints.groupEndPoints.getAllContribute(eventID));
+      var response = await http.get(url, headers: headers);
+      if (response.statusCode == 200) {
+        var data = await json.decode(utf8.decode(response.bodyBytes));
+        List<dynamic> jsonGroupContributes = data['groupContributes'];
+        List<GroupContribute> groupContributes =
+        jsonGroupContributes.map((json) => GroupContribute.fromJson(json)).toList();
+        return groupContributes;
       } else {
         return [];
       }

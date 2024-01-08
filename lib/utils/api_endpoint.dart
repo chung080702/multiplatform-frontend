@@ -66,6 +66,22 @@ class _GroupEndPoints {
   String getMembersOfGroup(String groupID, int page) {
     return 'group/$groupID/member/page/$page';
   }
+
+  String createContribute(String eventID) {
+    return 'event/$eventID/contribute';
+  }
+
+  String acceptContribute(String contributeID) {
+    return 'event/contribute/$contributeID';
+  }
+
+  String rejectContribute(String contributeID) {
+    return 'event/contribute/$contributeID';
+  }
+
+  String getAllContribute(String eventID) {
+    return 'event/$eventID/contribute';
+  }
 }
 
 class _FileEndPoints {
