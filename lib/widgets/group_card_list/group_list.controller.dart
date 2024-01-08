@@ -26,12 +26,8 @@ class GroupListController extends GetxController {
       if (response.statusCode == 200) {
         var data = await json.decode(utf8.decode(response.bodyBytes));
         List<dynamic> jsonGroups = data['groups'];
-        List<Group> groups = await Future.wait(jsonGroups.map((json) async {
-          var group = Group.fromJson(json);
-          group.events =
-              await groupController.fetchGetAllEventOfGroupAPI(group.id, 1);
-          return group;
-        }).toList());
+        List<Group> groups =
+            jsonGroups.map((json) => Group.fromJson(json)).toList();
         return groups;
       } else {
         return [];
@@ -51,12 +47,8 @@ class GroupListController extends GetxController {
       if (response.statusCode == 200) {
         var data = await json.decode(utf8.decode(response.bodyBytes));
         List<dynamic> jsonGroups = data['groups'];
-        List<Group> groups = await Future.wait(jsonGroups.map((json) async {
-          var group = Group.fromJson(json);
-          group.events =
-              await groupController.fetchGetAllEventOfGroupAPI(group.id, 1);
-          return group;
-        }).toList());
+        List<Group> groups =
+            jsonGroups.map((json) => Group.fromJson(json)).toList();
         return groups;
       } else {
         return [];
@@ -80,12 +72,8 @@ class GroupListController extends GetxController {
       if (response.statusCode == 200) {
         var data = await json.decode(utf8.decode(response.bodyBytes));
         List<dynamic> jsonGroups = data['groups'];
-        List<Group> groups = await Future.wait(jsonGroups.map((json) async {
-          var group = Group.fromJson(json);
-          group.events =
-              await groupController.fetchGetAllEventOfGroupAPI(group.id, 1);
-          return group;
-        }).toList());
+        List<Group> groups =
+            jsonGroups.map((json) => Group.fromJson(json)).toList();
         return groups;
       } else {
         return [];
@@ -109,12 +97,8 @@ class GroupListController extends GetxController {
       if (response.statusCode == 200) {
         var data = await json.decode(utf8.decode(response.bodyBytes));
         List<dynamic> jsonGroups = data['groups'];
-        List<Group> groups = await Future.wait(jsonGroups.map((json) async {
-          var group = Group.fromJson(json);
-          group.events =
-              await groupController.fetchGetAllEventOfGroupAPI(group.id, 1);
-          return group;
-        }).toList());
+        List<Group> groups =
+            jsonGroups.map((json) => Group.fromJson(json)).toList();
         return groups;
       } else {
         return [];

@@ -3,24 +3,25 @@ class Membership {
   final String accountId;
   final String groupId;
   final String status;
+  final String role;
 
   Membership(
       {required this.id,
       required this.accountId,
       required this.groupId,
-      required this.status});
+      required this.status,
+      required this.role});
 
   factory Membership.fromJson(Map<String, dynamic> json) {
-    return switch (json) {
-      {
-        '_id': String id,
-        'accountId': String accountId,
-        'groupId': String groupId,
-        'status': String status
-      } =>
-        Membership(
-            id: id, accountId: accountId, groupId: groupId, status: status),
-      _ => throw const FormatException('Failed to load Membership.')
-    };
+    String role = 'None';
+    if (json['role'] != null) {
+      role = json['role'];
+    }
+    return Membership(
+        id: json['_id'],
+        accountId: json['accountId'],
+        groupId: json['groupId'],
+        status: json['status'],
+        role: role);
   }
 }

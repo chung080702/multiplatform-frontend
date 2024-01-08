@@ -55,7 +55,7 @@ class RequestCard extends StatelessWidget {
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
                     ),
-                    maxLines: 2,
+                    maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
                   SizedBox(

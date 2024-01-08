@@ -107,6 +107,7 @@ class MemberJoinRequestTile extends StatefulWidget {
 }
 
 class _MemberJoinRequestTile extends State<MemberJoinRequestTile> {
+  bool isLoading = false;
   final groupController = Get.put(GroupController());
   bool visiable = true;
   @override
@@ -124,34 +125,68 @@ class _MemberJoinRequestTile extends State<MemberJoinRequestTile> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   IconButton(
-                      onPressed: () async {
-                        await groupController.fetchAcceptJoinGroupRequestAPI(
-                            widget.joinGroupRequest.groupId,
-                            widget.joinGroupRequest.id);
-                        setState(() {
-                          visiable = false;
-                        });
-                        Get.snackbar(
-                          'Thành công',
-                          'Đã chấp nhận yêu cầu tham gia',
-                          snackPosition: SnackPosition.BOTTOM,
-                        );
-                      },
+                      onPressed: isLoading
+                          ? null
+                          : () async {
+                              setState(() {
+                                isLoading = true;
+                              });
+                              bool accepted = await groupController
+                                  .fetchAcceptJoinGroupRequestAPI(
+                                      widget.joinGroupRequest.groupId,
+                                      widget.joinGroupRequest.id);
+                              if (accepted) {
+                                setState(() {
+                                  visiable = false;
+                                });
+                                Get.snackbar(
+                                  'Thành công',
+                                  'Đã chấp nhận yêu cầu tham gia',
+                                  snackPosition: SnackPosition.BOTTOM,
+                                );
+                              } else {
+                                setState(() {
+                                  isLoading = false;
+                                });
+                                Get.snackbar(
+                                  'Thất bại',
+                                  'Có lỗi xảy ra khi chấp nhận yêu cầu tham gia',
+                                  snackPosition: SnackPosition.BOTTOM,
+                                );
+                              }
+                            },
                       icon: Icon(Icons.done_rounded)),
                   IconButton(
-                      onPressed: () async {
-                        await groupController.fetchRejectJoinGroupRequestAPI(
-                            widget.joinGroupRequest.groupId,
-                            widget.joinGroupRequest.id);
-                        setState(() {
-                          visiable = false;
-                        });
-                        Get.snackbar(
-                          'Thành công',
-                          'Đã từ chối yêu cầu tham gia',
-                          snackPosition: SnackPosition.BOTTOM,
-                        );
-                      },
+                      onPressed: isLoading
+                          ? null
+                          : () async {
+                              setState(() {
+                                isLoading = true;
+                              });
+                              bool rejected = await groupController
+                                  .fetchRejectJoinGroupRequestAPI(
+                                      widget.joinGroupRequest.groupId,
+                                      widget.joinGroupRequest.id);
+                              if (rejected) {
+                                setState(() {
+                                  visiable = false;
+                                });
+                                Get.snackbar(
+                                  'Thành công',
+                                  'Đã từ chối yêu cầu tham gia',
+                                  snackPosition: SnackPosition.BOTTOM,
+                                );
+                              } else {
+                                setState(() {
+                                  isLoading = false;
+                                });
+                                Get.snackbar(
+                                  'Thất bại',
+                                  'Có lỗi xảy ra khi từ chối yêu cầu tham gia',
+                                  snackPosition: SnackPosition.BOTTOM,
+                                );
+                              }
+                            },
                       icon: Icon(Icons.cancel_rounded)),
                 ],
               ),
@@ -171,6 +206,7 @@ class MemberTile extends StatefulWidget {
 
 class _MemberTile extends State<MemberTile> {
   final groupController = Get.put(GroupController());
+  bool isLoading = false;
   bool visiable = true;
   @override
   Widget build(BuildContext context) {
@@ -188,18 +224,36 @@ class _MemberTile extends State<MemberTile> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   IconButton(
-                      onPressed: () async {
-                        await groupController.fetchDeleteMember(
-                            widget.member.groupId, widget.member.user.id);
-                        setState(() {
-                          visiable = false;
-                        });
-                        Get.snackbar(
-                          'Thành công',
-                          'Đã xóa thành viên',
-                          snackPosition: SnackPosition.BOTTOM,
-                        );
-                      },
+                      onPressed: isLoading
+                          ? null
+                          : () async {
+                              setState(() {
+                                isLoading = true;
+                              });
+                              bool deleted =
+                                  await groupController.fetchDeleteMember(
+                                      widget.member.groupId,
+                                      widget.member.user.id);
+                              if (deleted) {
+                                setState(() {
+                                  visiable = false;
+                                });
+                                Get.snackbar(
+                                  'Thành công',
+                                  'Đã xóa thành viên',
+                                  snackPosition: SnackPosition.BOTTOM,
+                                );
+                              } else {
+                                setState(() {
+                                  isLoading = false;
+                                });
+                                Get.snackbar(
+                                  'Thất bại',
+                                  'Có lỗi xảy ra khi xóa thành viên',
+                                  snackPosition: SnackPosition.BOTTOM,
+                                );
+                              }
+                            },
                       icon: Icon(Icons.delete_rounded)),
                 ],
               ),

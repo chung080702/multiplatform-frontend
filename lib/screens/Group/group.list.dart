@@ -40,16 +40,17 @@ class _GroupListState extends State<GroupList> {
             return GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                childAspectRatio: 0.7,
+                childAspectRatio: 0.68,
               ),
               itemCount: snapshot.data!.length,
               shrinkWrap: true,
               padding: EdgeInsets.all(4),
               itemBuilder: (context, index) {
-                return GroupCardNotJoined(
-                  type: widget.info['type'],
-                  group: snapshot.data![index],
-                );
+                // return GroupCard(
+                //   type: widget.info['type'],
+                //   group: snapshot.data![index],
+                // );
+                return GroupCard2(groupId: snapshot.data![index].id);
               },
             );
           } else if (snapshot.hasError) {
@@ -73,7 +74,6 @@ class _GroupListState extends State<GroupList> {
       }
     } else if (widget.info['type'] == 'joined') {
       try {
-        print("user");
         var tmpGroupList = await groupListController.fetchGetAllOfUserApi();
         return tmpGroupList;
       } catch (e) {

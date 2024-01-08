@@ -83,29 +83,54 @@ class _GroupDetail extends State<GroupDetail> {
                                 );
                               },
                             ),
-                            MenuItemButton(
-                              child: Row(
-                                // mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Icon(Icons.how_to_reg_rounded),
-                                  Container(
-                                    width: 4,
-                                  ),
-                                  Text("Yêu cầu tham gia")
-                                ],
-                              ),
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => MemberList(
-                                      groupId: group.id,
-                                      type: "joinRequests",
+                            if (group.membership.role == 'Admin')
+                              MenuItemButton(
+                                child: Row(
+                                  // mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(Icons.how_to_reg_rounded),
+                                    Container(
+                                      width: 4,
                                     ),
-                                  ),
-                                );
-                              },
-                            ),
+                                    Text("Sự kiện đang chờ")
+                                  ],
+                                ),
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => MemberList(
+                                        groupId: group.id,
+                                        type: "joinRequests",
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            if (group.membership.role == 'Admin')
+                              MenuItemButton(
+                                child: Row(
+                                  // mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(Icons.how_to_reg_rounded),
+                                    Container(
+                                      width: 4,
+                                    ),
+                                    Text("Yêu cầu tham gia")
+                                  ],
+                                ),
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => MemberList(
+                                        groupId: group.id,
+                                        type: "joinRequests",
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
                             MenuItemButton(
                               child: Row(
                                 children: [
@@ -150,18 +175,24 @@ class _GroupDetail extends State<GroupDetail> {
                           Container(height: 8),
                           if (type != 'joined')
                             FilledButton(
-                              onPressed: () async {
-                                setState(() {
-                                  isLoading = true;
-                                });
-                                if (type == 'notJoined') {
-                                  bool isRequested = await groupController
-                                      .fetchJoinGroupAPI(widget.groupId);
-                                } else if (type == 'pending') {}
-                                setState(() {
-                                  isLoading = false;
-                                });
-                              },
+                              onPressed: isLoading
+                                  ? null
+                                  : () async {
+                                      setState(() {
+                                        isLoading = true;
+                                      });
+                                      if (type == 'notJoined') {
+                                        bool isRequested = await groupController
+                                            .fetchJoinGroupAPI(widget.groupId);
+                                      } else if (type == 'pending') {
+                                        await groupController.fetchDeleteMember(
+                                            group.id,
+                                            group.membership.accountId);
+                                      }
+                                      setState(() {
+                                        isLoading = false;
+                                      });
+                                    },
                               child: SizedBox(
                                 width: double.infinity,
                                 child: Center(

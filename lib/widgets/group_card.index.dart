@@ -10,16 +10,16 @@ class GroupCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8)
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       clipBehavior: Clip.antiAliasWithSaveLayer,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Image.network(
-            ApiEndPoints.baseURL + ApiEndPoints.fileEndPoints.getFile + group.imageId,
+            ApiEndPoints.baseURL +
+                ApiEndPoints.fileEndPoints.getFile +
+                group.imageId,
             height: 140,
             width: 240,
             fit: BoxFit.cover,
@@ -37,16 +37,12 @@ class GroupCard extends StatelessWidget {
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
                   ),
-                  maxLines: 2,
+                  maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-
                 ),
                 Text(
                   '${group.memberNumber} thành viên',
-                  style: TextStyle(
-                      fontSize: 13,
-                      color: Colors.black54
-                  ),
+                  style: TextStyle(fontSize: 13, color: Colors.black54),
                 ),
               ],
             ),

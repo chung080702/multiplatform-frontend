@@ -18,6 +18,7 @@ class _CreateGroupState extends State<CreateGroup> {
   final TextEditingController groupDescController = TextEditingController();
   final _form = GlobalKey<FormState>();
   File? bgImage;
+  bool isLoading = false;
 
   Future<void> pickImage() async {
     final picker = ImagePicker();
@@ -115,22 +116,47 @@ class _CreateGroupState extends State<CreateGroup> {
                     )),
                 Container(height: 8),
                 FilledButton(
-                    onPressed: () async {
-                      if (_form.currentState!.validate() && bgImage != null) {
-                        final bool createdGroup = await fetchCreateGroup(
-                            groupNameController.text,
-                            groupDescController.text,
-                            bgImage!);
-                        if (createdGroup) {
-                        } else {}
-                      }
-                    },
-                    child: const SizedBox(
-                      width: double.infinity,
-                      child: Center(
-                        child: Text("Xong"),
-                      ),
-                    ))
+                  onPressed: isLoading
+                      ? null
+                      : () async {
+                          if (_form.currentState!.validate() &&
+                              bgImage != null) {
+                            setState(() {
+                              isLoading = true;
+                            });
+                            final bool createdGroup = await fetchCreateGroup(
+                                groupNameController.text,
+                                groupDescController.text,
+                                bgImage!);
+                            if (createdGroup) {
+                              Get.back();
+                              Get.snackbar(
+                                'Thành công',
+                                'Đã tạo nhóm',
+                                snackPosition: SnackPosition.BOTTOM,
+                              );
+                            } else {
+                              Get.snackbar(
+                                'Thất bại',
+                                'Tạo nhóm thất bại',
+                                snackPosition: SnackPosition.BOTTOM,
+                              );
+                            }
+
+                            setState(() {
+                              isLoading = false;
+                            });
+                          }
+                        },
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: Center(
+                      child: isLoading
+                          ? CircularProgressIndicator()
+                          : Text("Xong"),
+                    ),
+                  ),
+                )
               ],
             ),
           ),

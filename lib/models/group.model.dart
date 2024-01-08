@@ -20,7 +20,11 @@ class Group {
 
   factory Group.fromJson(Map<String, dynamic> json) {
     Membership membership = Membership(
-        id: "None", accountId: "None", groupId: "None", status: "None");
+        id: "None",
+        accountId: "None",
+        groupId: "None",
+        status: "None",
+        role: "None");
     List<dynamic> membershipJson = json['membership'];
     List<Membership> membershipList =
         membershipJson.map((e) => Membership.fromJson(e)).toList();
