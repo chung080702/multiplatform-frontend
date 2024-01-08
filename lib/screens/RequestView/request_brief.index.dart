@@ -23,8 +23,8 @@ class RequestBrief extends StatelessWidget {
                     ApiEndPoints.baseURL +
                         ApiEndPoints.fileEndPoints.getFile +
                         request.image,
-                    height: 100,
-                    width: 100,
+                    height: 80,
+                    width: 80,
                     fit: BoxFit.cover,
                   )
                 : Container(
@@ -41,6 +41,7 @@ class RequestBrief extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       request.title,
@@ -50,7 +51,7 @@ class RequestBrief extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      width: 20,
+                      width: 10,
                     ),
                     Container(
                       decoration: BoxDecoration(
