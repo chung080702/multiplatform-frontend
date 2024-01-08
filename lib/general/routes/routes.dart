@@ -13,7 +13,10 @@ class Routes {
   static Route<dynamic> onGeneralRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case addEvent:
-        return BasePageRoute(child: const AddEvent());
+        return BasePageRoute(
+            child: const AddEvent(
+          groupId: "hghgh",
+        ));
       case eventList:
         return BasePageRoute(child: const ViewEvent());
       case eventDetail:

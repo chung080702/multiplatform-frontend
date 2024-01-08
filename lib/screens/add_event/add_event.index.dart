@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:get/get.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,13 +11,15 @@ import 'package:multiplatform_app/models/request.model.dart';
 import 'package:multiplatform_app/screens/add_event/add_event.controller.dart';
 
 class AddEvent extends StatefulWidget {
-  const AddEvent({super.key});
+  const AddEvent({super.key, required this.groupId});
+  final String groupId;
 
   @override
   State<AddEvent> createState() => _AddEventState();
 }
 
 class _AddEventState extends State<AddEvent> {
+  bool isLoading = false;
   late TextEditingController eventNameController;
   late TextEditingController eventDescController;
   late TextEditingController startTimeController;
@@ -409,26 +411,45 @@ class _AddEventState extends State<AddEvent> {
                     ],
                   )),
               ElevatedButton(
-                  onPressed: () async {
-                    if (_formKey.currentState!.validate()) {
-                      bool result = await addEventController.createEvent(
-                          "657ebd5d9afe4c1007dff9af",
-                          eventNameController.text,
-                          eventDescController.text,
-                          startTimeController.text,
-                          endTimeController.text,
-                          addressController.text,
-                          contentController.text,
-                          selectedRequest?.id,
-                          images);
-                      if (result) {
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text("addition failed")));
-                      }
-                    }
-                  },
-                  child: const Text("Thêm sự kiện"))
+                  onPressed: isLoading
+                      ? null
+                      : () async {
+                          if (_formKey.currentState!.validate()) {
+                            setState(() {
+                              isLoading = true;
+                            });
+                            bool result = await addEventController.createEvent(
+                                widget.groupId,
+                                eventNameController.text,
+                                eventDescController.text,
+                                startTimeController.text,
+                                endTimeController.text,
+                                addressController.text,
+                                contentController.text,
+                                selectedRequest?.id,
+                                images);
+                            if (result) {
+                              Get.back();
+                              Get.snackbar(
+                                'Thành công',
+                                'Đã thêm sự kiện',
+                                snackPosition: SnackPosition.BOTTOM,
+                              );
+                            } else {
+                              setState(() {
+                                isLoading = false;
+                              });
+                              Get.snackbar(
+                                'Thất bại',
+                                'Có lỗi xảy ra khi thêm sự kiện',
+                                snackPosition: SnackPosition.BOTTOM,
+                              );
+                            }
+                          }
+                        },
+                  child: isLoading
+                      ? CircularProgressIndicator()
+                      : Text("Thêm sự kiện"))
             ],
           ),
         ),

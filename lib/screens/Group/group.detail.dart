@@ -42,7 +42,9 @@ class _GroupDetail extends State<GroupDetail> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => AddEvent()));
+                                    builder: (context) => AddEvent(
+                                          groupId: group.id,
+                                        )));
                           },
                           icon: Icon(Icons.add_rounded),
                           tooltip: "Thêm sự kiện",
@@ -83,30 +85,30 @@ class _GroupDetail extends State<GroupDetail> {
                                 );
                               },
                             ),
-                            if (group.membership.role == 'Admin')
-                              MenuItemButton(
-                                child: Row(
-                                  // mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Icon(Icons.how_to_reg_rounded),
-                                    Container(
-                                      width: 4,
-                                    ),
-                                    Text("Sự kiện đang chờ")
-                                  ],
-                                ),
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => MemberList(
-                                        groupId: group.id,
-                                        type: "joinRequests",
-                                      ),
-                                    ),
-                                  );
-                                },
-                              ),
+                            // if (group.membership.role == 'Admin')
+                            //   MenuItemButton(
+                            //     child: Row(
+                            //       // mainAxisSize: MainAxisSize.min,
+                            //       children: [
+                            //         Icon(Icons.how_to_reg_rounded),
+                            //         Container(
+                            //           width: 4,
+                            //         ),
+                            //         Text("Sự kiện đang chờ")
+                            //       ],
+                            //     ),
+                            //     onPressed: () {
+                            //       Navigator.push(
+                            //         context,
+                            //         MaterialPageRoute(
+                            //           builder: (context) => MemberList(
+                            //             groupId: group.id,
+                            //             type: "joinRequests",
+                            //           ),
+                            //         ),
+                            //       );
+                            //     },
+                            //   ),
                             if (group.membership.role == 'Admin')
                               MenuItemButton(
                                 child: Row(
