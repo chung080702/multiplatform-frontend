@@ -104,6 +104,20 @@ class _EventEndPoints {
   String rejectEvent(String eventID) {
     return 'event/$eventID';
   }
+
+  String getNotJoinEvents(String eventID, int pageNumber) {
+    return 'event/contribute/none/page/$pageNumber/search';
+  }
+
+  String getPendingJoinEvents(String eventID, int pageNumber) {
+    return 'event/contribute/pending/page/$pageNumber/search';
+  }
+
+  String getAcceptedJoinEvents(String eventID, int pageNumber) {
+    return 'event/contribute/accepted/page/$pageNumber/search';
+  }
+
+
 }
 
 class _RequestEndPoints {
